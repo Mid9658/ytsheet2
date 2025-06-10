@@ -3,6 +3,7 @@ use utf8;
 use open ":utf8";
 
 print "Content-Type: text/html\n\n";
+
 print "<html><head><meta charset=\"UTF-8\"><title>キャラクター一覧 - $set::title</title></head><body>";
 print "<h1>キャラクター一覧</h1>";
 

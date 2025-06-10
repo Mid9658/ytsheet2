@@ -39,5 +39,4 @@ our $lib_palette   = $::core_dir . '/lib/palette.pl';
 # 一覧表示用ライブラリ
 our $lib_list_char = $::core_dir . '/lib/nc/list-chara.pl';
 
-
-1;
+od
