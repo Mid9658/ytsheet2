@@ -12,6 +12,7 @@ my $tmpl = HTML::Template->new(
   search_path_on_include => 1,
   loop_context_vars => 1,
   die_on_bad_params => 0,
+  die_on_missing_include => 0,
   case_sensitive    => 1,
   global_vars       => 1,
 );

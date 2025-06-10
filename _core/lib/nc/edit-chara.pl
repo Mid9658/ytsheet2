@@ -14,6 +14,7 @@ my $tmpl = HTML::Template->new(
   path              => ['./', $::core_dir.'/skin/nc', $::core_dir.'/skin/_common', $::core_dir],
   search_path_on_include => 1,
   die_on_bad_params => 0,
+  die_on_missing_include => 0,
   case_sensitive    => 1,
   global_vars       => 1,
 );
