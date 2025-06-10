@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<TMPL_INCLUDE NAME="../_common/sheet-head.html">
+</head>
+<body>
+<header>
+  <h1><a href="./"><TMPL_VAR title></a></h1>
+  <nav>
+    <ul>
+      <TMPL_LOOP Menu><li class="<TMPL_VAR SIZE>"><a <TMPL_VAR TYPE>="<TMPL_VAR VALUE>"><TMPL_VAR TEXT></a></TMPL_LOOP>
+      <li><a onclick="nightModeChange()" class="nightmode-icon" title="ナイトモード"></a>
+    </ul>
+  </nav>
+</header>
+<div class="header-back-name"><TMPL_VAR titleName> - <TMPL_VAR title></div>
+<main id="character">
+<article>
+  <div id="area-name" class="color-set">
+    <h1 id="character-name"><TMPL_IF aka>“<TMPL_VAR aka>”</TMPL_IF><TMPL_VAR characterName></h1>
+    <div>
+      <p id="update-time"><time><TMPL_VAR updateTime></time></p>
+      <p id="player-name">プレイヤー：<TMPL_VAR playerName></p>
+    </div>
+  </div>
+
+  <div id="area-status">
+    <div id="image" class="image" style="background-image:url(<TMPL_VAR imageSrc>);"></div>
+    <div id="personal" class="box">
+      <dl><dt>年齢<dd><TMPL_VAR age></dl>
+      <dl><dt>性別<dd><TMPL_VAR gender></dl>
+    </div>
+    <div id="works-cover" class="box">
+      <dl><dt>ポジション<dd><TMPL_VAR position></dl>
+      <dl><dt>メインクラス<dd><TMPL_VAR mainClass></dl>
+      <dl><dt>サブクラス<dd><TMPL_VAR subClass></dl>
+    </div>
+    <div id="renegade" class="box">
+      <table id="enhancement">
+        <thead><tr><th>武装<th>変異<th>改造<th>任意</tr></thead>
+        <tbody><tr>
+          <td><TMPL_VAR enhanceArms></td>
+          <td><TMPL_VAR enhanceMutate></td>
+          <td><TMPL_VAR enhanceModify></td>
+          <td><TMPL_VAR enhanceAny></td>
+        </tr></tbody>
+      </table>
+      <dl><dt>行動値<dd><TMPL_VAR actionPoint></dl>
+      <dl><dt>狂気点<dd><TMPL_VAR madnessPoint></dl>
+    </div>
+  </div>
+
+  <section id="maneuvers" class="box">
+    <h2>マニューバ</h2>
+    <table>
+      <thead>
+        <tr><th>破損<th>使用<th>部位<th>名称<th>タイミング<th>コスト<th>射程<th>効果</tr>
+      </thead>
+      <tbody>
+        <TMPL_LOOP Maneuvers>
+        <tr>
+          <td><TMPL_VAR BROKEN></td>
+          <td><TMPL_VAR USED></td>
+          <td><TMPL_VAR PART></td>
+          <td><TMPL_VAR NAME></td>
+          <td><TMPL_VAR TIMING></td>
+          <td><TMPL_VAR COST></td>
+          <td><TMPL_VAR RANGE></td>
+          <td><TMPL_VAR NOTE></td>
+        </tr>
+        </TMPL_LOOP>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="memory" class="box">
+    <h2>メモリー</h2>
+    <div id="memory-note"><TMPL_VAR memory></div>
+  </section>
+
+  <section id="free-note" class="box">
+    <h2>自由メモ</h2>
+    <div><TMPL_VAR freeNote></div>
+  </section>
+</article>
+<div class="back-button"><a href="./">⏎</a></div>
+</main>
+<footer>
+  <p class="notes">©Incog.Lab「永い後日談のネクロニカ」</p>
+  <p class="copyright">©<a href="https://yutorize.2-d.jp">ゆとらいず工房</a>「ゆとシートⅡ」ver.<TMPL_VAR ver></p>
+</footer>
+</body>
+</html>
