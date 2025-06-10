@@ -1,0 +1,39 @@
+@charset "utf-8";
+
+/* Nechronica basic layout */
+body {
+  background-image: url(../../_common/img/back-pattern.png);
+}
+
+article {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+}
+
+#area-status {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: .5rem;
+}
+
+#maneuvers table,
+#enhancement table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#maneuvers th, #maneuvers td {
+  border: 1px solid #aaa;
+  padding: .2rem .4rem;
+}
+
+#free-note {
+  white-space: pre-wrap;
+}
+
+@media screen and (max-width: 735px) {
+  article {
+    grid-template-columns: 1fr;
+  }
+}

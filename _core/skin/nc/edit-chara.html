@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <TMPL_INCLUDE NAME="../_common/sheet-head.html">
+  <link rel="stylesheet" media="all" href="<TMPL_VAR coreDir>/skin/nc/css/edit.css?<TMPL_VAR ver>">
+</head>
+<body>
+<header>
+  <h1><a href="./"><TMPL_VAR title></a></h1>
+  <nav>
+    <ul>
+      <TMPL_LOOP Menu><li class="<TMPL_VAR SIZE>"><a <TMPL_VAR TYPE>="<TMPL_VAR VALUE>"><TMPL_VAR TEXT></a></TMPL_LOOP>
+      <li><a onclick="nightModeChange()" class="nightmode-icon" title="ナイトモード"></a>
+    </ul>
+  </nav>
+</header>
+<div class="header-back-name"><TMPL_VAR titleName> - <TMPL_VAR title></div>
+<main id="character">
+<form id="edit-form" method="post" action="./">
+<input type="hidden" name="mode" value="make">
+<input type="hidden" name="id" value="<TMPL_VAR id>">
+<article>
+<section id="area-name" class="box color-set">
+  <h2>基本情報</h2>
+  <dl>
+    <dt>キャラクター名<dd><input type="text" name="characterName" value="<TMPL_VAR characterName>">
+    <dt>プレイヤー名<dd><input type="text" name="playerName" value="<TMPL_VAR playerName>">
+    <dt>コードネーム<dd><input type="text" name="aka" value="<TMPL_VAR aka>">
+  </dl>
+</section>
+<section id="area-status" class="box">
+  <h2>ステータス</h2>
+  <dl>
+    <dt>年齢<dd><input type="text" name="age" value="<TMPL_VAR age>">
+    <dt>性別<dd><input type="text" name="gender" value="<TMPL_VAR gender>">
+  </dl>
+  <dl>
+    <dt>ポジション<dd>
+      <select name="position">
+        <option value="">--</option>
+        <option>アリス</option>
+        <option>ホリック</option>
+        <option>オートマトン</option>
+        <option>ジャンク</option>
+        <option>コート</option>
+        <option>ソロリティ</option>
+      </select>
+    <dt>メインクラス<dd>
+      <select name="mainClass">
+        <option value="">--</option>
+        <option>ステーシー</option>
+        <option>タナトス</option>
+        <option>ゴシック</option>
+        <option>レクイエム</option>
+        <option>バロック</option>
+        <option>ロマネスク</option>
+        <option>サイケデリック</option>
+      </select>
+    <dt>サブクラス<dd>
+      <select name="subClass">
+        <option value="">--</option>
+        <option>ステーシー</option>
+        <option>タナトス</option>
+        <option>ゴシック</option>
+        <option>レクイエム</option>
+        <option>バロック</option>
+        <option>ロマネスク</option>
+        <option>サイケデリック</option>
+      </select>
+  </dl>
+  <table id="enhancement">
+    <thead><tr><th>武装<th>変異<th>改造<th>任意</tr></thead>
+    <tbody><tr>
+      <td><input type="number" name="enhanceArms" value="<TMPL_VAR enhanceArms>"></td>
+      <td><input type="number" name="enhanceMutate" value="<TMPL_VAR enhanceMutate>"></td>
+      <td><input type="number" name="enhanceModify" value="<TMPL_VAR enhanceModify>"></td>
+      <td>
+        <label><input type="radio" name="enhanceAny" value="arms">武装</label>
+        <label><input type="radio" name="enhanceAny" value="mutate">変異</label>
+        <label><input type="radio" name="enhanceAny" value="modify">改造</label>
+      </td>
+    </tr></tbody>
+  </table>
+  <dl>
+    <dt>行動値<dd><input type="number" name="actionPoint" value="<TMPL_VAR actionPoint>">
+    <dt>狂気点<dd><input type="number" name="madnessPoint" value="<TMPL_VAR madnessPoint>">
+  </dl>
+</section>
+<section id="maneuvers" class="box">
+  <h2>マニューバ</h2>
+  <table class="edit-table">
+    <thead>
+      <tr><th>破損<th>使用<th>部位<th>名称<th>タイミング<th>コスト<th>射程<th>効果</tr>
+    </thead>
+    <tbody id="maneuvers-body">
+      <tr>
+        <td><input type="checkbox" name="maneuverBroken1"></td>
+        <td><input type="checkbox" name="maneuverUsed1"></td>
+        <td>
+          <select name="maneuverPart1">
+            <option>スキル</option>
+            <option>頭</option>
+            <option>腕</option>
+            <option>胴</option>
+            <option>脚</option>
+          </select>
+        </td>
+        <td><input type="text" name="maneuverName1"></td>
+        <td><input type="text" name="maneuverTiming1"></td>
+        <td><input type="text" name="maneuverCost1"></td>
+        <td><input type="text" name="maneuverRange1"></td>
+        <td><input type="text" name="maneuverNote1"></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+<section id="memory" class="box">
+  <h2>メモリー</h2>
+  <textarea name="memory" rows="4"><TMPL_VAR memory></textarea>
+</section>
+<section id="free-note" class="box">
+  <h2>自由メモ</h2>
+  <textarea name="freeNote" rows="4"><TMPL_VAR freeNote></textarea>
+</section>
+<p class="submit"><input type="submit" value="保存"></p>
+</article>
+</form>
+<div class="back-button"><a href="./">⏎</a></div>
+</main>
+<script src="<TMPL_VAR coreDir>/lib/edit.js?<TMPL_VAR ver>" defer></script>
+<script src="<TMPL_VAR coreDir>/lib/nc/edit-chara.js?<TMPL_VAR ver>" defer></script>
+<footer>
+  <p class="notes">©Incog.Lab「永い後日談のネクロニカ」</p>
+  <p class="copyright">©<a href="https://yutorize.2-d.jp">ゆとらいず工房</a>「ゆとシートⅡ」ver.<TMPL_VAR ver></p>
+</footer>
+</body>
+</html>
