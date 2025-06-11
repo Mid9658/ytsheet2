@@ -266,11 +266,7 @@ sub random_id {
 sub token_check {
   my $in_token = shift;
   my $flag = 0;
-  my $file = $set::tokenfile;
-  sysopen(my $FH, $file, O_RDWR | O_CREAT, 0666) or do {
-    $file = '/tmp/ytsheet_token.cgi';
-    sysopen($FH, $file, O_RDWR | O_CREAT, 0666) or return 0;
-  };
+  open (my $FH, '+<', $set::tokenfile);
   flock($FH, 2);
   my @list = <$FH>;
   seek($FH, 0, 0);
