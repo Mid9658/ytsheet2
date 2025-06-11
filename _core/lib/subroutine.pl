@@ -266,7 +266,7 @@ sub random_id {
 sub token_check {
   my $in_token = shift;
   my $flag = 0;
-  open (my $FH, '+<', $set::tokenfile);
+  sysopen(my $FH, $set::tokenfile, O_RDWR | O_CREAT, 0666) or return 0;
   flock($FH, 2);
   my @list = <$FH>;
   seek($FH, 0, 0);

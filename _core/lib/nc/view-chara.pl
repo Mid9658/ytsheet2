@@ -23,7 +23,6 @@ my $tmpl = HTML::Template->new(
 $pc{maneuverNum} ||= 3;
 my @maneuvers;
 foreach my $i (1 .. $pc{maneuverNum}){
-  next if !existsRow "maneuver$i",'Name','Timing','Cost','Range','Note';
   push @maneuvers, {
     BROKEN => ($pc{"maneuverBroken$i"} ? '☑' : ''),
     USED   => ($pc{"maneuverUsed$i"}  ? '☑' : ''),
