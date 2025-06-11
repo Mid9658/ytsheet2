@@ -35,6 +35,29 @@ foreach my $i (1 .. $pc{maneuverNum}){
   };
 }
 
+$pc{memoryNum} ||= 0;
+my @memory_rows;
+foreach my $i (1 .. $pc{memoryNum}){
+  push @memory_rows, {
+    NAME => $pc{"memoryName$i"},
+    NOTE => $pc{"memoryNote$i"},
+  };
+}
+
+my @fetter_rows;
+foreach my $i (1 .. 6){
+  my $p = $pc{"fetterPoint$i"} || 0;
+  my $mark = '○○○○';
+  substr($mark,0,$p) = '●' x $p;
+  push @fetter_rows, {
+    TARGET    => $pc{"fetterTarget$i"},
+    NOTE      => $pc{"fetterNote$i"},
+    EFFECT    => $pc{"fetterEffect$i"},
+    POINT     => $p,
+    POINT_MARK=> $mark,
+  };
+}
+
 if(!$pc{group}){
   $pc{group} = $set::group_default;
 }
@@ -54,6 +77,8 @@ $tmpl->param(
   groupName   => $group_name,
   Tags        => \@tags,
   Maneuvers   => \@maneuvers,
+  MemoryRows  => \@memory_rows,
+  FetterRows  => \@fetter_rows,
 );
 
 my @menu;

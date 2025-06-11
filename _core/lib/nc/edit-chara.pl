@@ -27,6 +27,11 @@ $pc{enhanceMutateGrow} ||= 0;
 $pc{enhanceModifyGrow} ||= 0;
 $pc{enhanceAny}       ||= '';
 $pc{maneuverNum}      ||= 3;
+$pc{memoryNum}        ||= 2;
+foreach my $i (1 .. 6){
+  $pc{"fetterPoint$i"} ||= ($i == 1 ? 3 : '');
+}
+$pc{memoryNum}        ||= 2;
 $pc{forbidden}        ||= '';
 $pc{group}            ||= $set::group_default if defined $set::group_default;
 $pc{tags}             ||= '';
@@ -77,6 +82,26 @@ foreach my $i (1 .. $pc{maneuverNum}){
   };
 }
 
+my @memory_rows;
+foreach my $i (1 .. $pc{memoryNum}){
+  push @memory_rows, {
+    ID   => $i,
+    NAME => $pc{"memoryName$i"},
+    NOTE => $pc{"memoryNote$i"},
+  };
+}
+
+my @fetter_rows;
+foreach my $i (1 .. 6){
+  push @fetter_rows, {
+    ID     => $i,
+    TARGET => $pc{"fetterTarget$i"},
+    NOTE   => $pc{"fetterNote$i"},
+    EFFECT => $pc{"fetterEffect$i"},
+    POINT  => $pc{"fetterPoint$i"},
+  };
+}
+
 my $titleName = ($mode eq 'edit') ? '編集' : '新規作成';
 my $passHidden = ($mode eq 'edit' && $pc{protect} eq 'password' && $::in{pass}) ? 1 : 0;
 
@@ -123,7 +148,9 @@ $tmpl->param(
   madnessPoint => $pc{madnessPoint},
   imageURL     => $pc{imageURL},
   imageForm    => $imageForm,
-  memory       => $pc{memory},
+  memoryNum    => $pc{memoryNum},
+  MemoryRows   => \@memory_rows,
+  FetterRows   => \@fetter_rows,
   freeNote     => $pc{freeNote},
   forbidden    => $pc{forbidden},
   hide         => $pc{hide},

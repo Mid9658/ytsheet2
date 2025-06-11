@@ -50,6 +50,11 @@ window.addEventListener('DOMContentLoaded',()=>{
     const num = Number(form.maneuverNum.value) || 0;
     for(let i=0; i<num; i++){ addManeuver(); }
   }
+  setSortable('memory','#memory-table tbody','tr');
+  if(!document.querySelector('#memory-list tr')){
+    const num = Number(form.memoryNum.value) || 0;
+    for(let i=0; i<num; i++){ addMemory(); }
+  }
 });
 
 // マニューバ欄 ----------------------------------------
@@ -58,4 +63,12 @@ function addManeuver(){
 }
 function delManeuver(){
   delRow('maneuverNum', '#maneuver-table tbody:last-of-type');
+}
+
+// 記憶のカケラ欄 ----------------------------------------
+function addMemory(){
+  document.querySelector('#memory-table tbody').append(createRow('memory','memoryNum',6));
+}
+function delMemory(){
+  delRow('memoryNum', '#memory-table tbody:last-of-type',2);
 }

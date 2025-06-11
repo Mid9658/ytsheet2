@@ -21,7 +21,9 @@ our $login_users = $::core_dir . '/data/login_users.cgi';
 # 一時トークン保存ファイル
 # デフォルトではコアディレクトリに保存されますが、書き込み権限の都合で
 # エラーになる場合があるため、Nechronica用データディレクトリに変更
-our $tokenfile   = './data/token.cgi';
+## 一時トークン保存ファイル
+## 他システムと同様にコアディレクトリ配下を使用
+our $tokenfile   = $::core_dir . '/data/token.cgi';
 
 our $lib_form     = $::core_dir . '/lib/form.pl';
 our $lib_info     = $::core_dir . '/lib/info.pl';
