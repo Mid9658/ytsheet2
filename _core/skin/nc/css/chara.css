@@ -20,6 +20,13 @@ article {
   grid-template-columns: 1fr 1fr;
   grid-gap: .5rem;
 }
+#personal {
+  display: flex;
+  gap: .5rem;
+}
+#personal dl {
+  flex: 1;
+}
 
 #maneuvers table,
 #enhancement table {
