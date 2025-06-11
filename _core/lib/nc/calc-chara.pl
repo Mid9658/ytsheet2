@@ -10,6 +10,22 @@ sub data_calc {
   $pc{tags} ||= '';
   $pc{hide} ||= 0;
 
+  ### 記憶のカケラ
+  $pc{memoryNum} ||= 2;
+  $pc{memoryNum} = 6 if $pc{memoryNum} > 6;
+  foreach my $i (1 .. $pc{memoryNum}){
+    $pc{"memoryName$i"} ||= '';
+    $pc{"memoryNote$i"} ||= '';
+  }
+
+  ### 未練／狂気
+  foreach my $i (1 .. 6){
+    $pc{"fetterTarget$i"} ||= '';
+    $pc{"fetterNote$i"}   ||= '';
+    $pc{"fetterEffect$i"} ||= '';
+    $pc{"fetterPoint$i"}  ||= ($i == 1 ? 3 : '');
+  }
+
   $pc{enhanceAny} ||= '';
   $pc{enhanceArmsGrow}   ||= 0;
   $pc{enhanceMutateGrow} ||= 0;

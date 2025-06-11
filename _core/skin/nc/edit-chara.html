@@ -229,8 +229,46 @@
   </template>
 </section>
 <section id="memory" class="box">
-  <h2>メモリー</h2>
-  <textarea name="memory" rows="4"><TMPL_VAR memory></textarea>
+  <h2>記憶のカケラ</h2>
+  <input type="hidden" name="memoryNum" value="<TMPL_VAR memoryNum>">
+  <table class="edit-table no-border-cells" id="memory-table">
+    <thead>
+      <tr><th>名称<th class="left">内容</tr>
+    </thead>
+    <tbody id="memory-list">
+<TMPL_LOOP MemoryRows>
+      <tr id="memory-row<TMPL_VAR ID>">
+        <td><input type="text" name="memoryName<TMPL_VAR ID>" value="<TMPL_VAR NAME>"></td>
+        <td><input type="text" name="memoryNote<TMPL_VAR ID>" value="<TMPL_VAR NOTE>"></td>
+      </tr>
+</TMPL_LOOP>
+    </tbody>
+  </table>
+  <div class="add-del-button"><a onclick="addMemory()">▼</a><a onclick="delMemory()">▲</a></div>
+  <template id="memory-template">
+    <tr id="memory-rowTMPL">
+      <td><input type="text" name="memoryNameTMPL"></td>
+      <td><input type="text" name="memoryNoteTMPL"></td>
+    </tr>
+  </template>
+</section>
+<section id="fetters" class="box">
+  <h2>未練／狂気</h2>
+  <table class="edit-table no-border-cells" id="fetters-table">
+    <thead>
+      <tr><th>未練対象<th>未練内容<th>発狂効果<th>狂気点</tr>
+    </thead>
+    <tbody>
+<TMPL_LOOP FetterRows>
+      <tr>
+        <td><input type="text" name="fetterTarget<TMPL_VAR ID>" value="<TMPL_VAR TARGET>"></td>
+        <td><input type="text" name="fetterNote<TMPL_VAR ID>" value="<TMPL_VAR NOTE>"></td>
+        <td><input type="text" name="fetterEffect<TMPL_VAR ID>" value="<TMPL_VAR EFFECT>"></td>
+        <td><input type="number" name="fetterPoint<TMPL_VAR ID>" value="<TMPL_VAR POINT>" min="0" max="4"></td>
+      </tr>
+</TMPL_LOOP>
+    </tbody>
+  </table>
 </section>
 <section id="free-note" class="box">
   <h2>自由メモ</h2>
