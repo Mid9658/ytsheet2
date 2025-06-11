@@ -33,7 +33,7 @@ elsif($mode eq 'convert'){
   elsif($::in{file}){
     my $data; my $buffer; my $i;
     while(my $bytesread = read(param('file'), $buffer, 2048)) {
-      if(!$i && $buffer !~ /^{/){ error('有効なJSONデータではありません。'); }
+      if(!$i && $buffer !~ /^{/){ error '有効なJSONデータではありません。' }
       $data .= $buffer;
       $i++;
     }
@@ -103,7 +103,7 @@ sub getSheetData {
   elsif($mode eq 'copy'){
     my $datatype = ($::in{log}) ? 'logs' : 'data';
     my $hit = 0;
-    open my $IN, '<', "${sheetDir}/${datatype}.cgi" or error('データがありません。');
+    open my $IN, '<', "${sheetDir}/${datatype}.cgi" or error 'データがありません。';
     while (<$IN>){
       if($datatype eq 'logs'){
         if (index($_, "=$::in{log}:") == 0){ $hit = 1; next; }
@@ -163,16 +163,10 @@ sub tokenMake {
   my $token = random_id(12);
 
   my $mask = umask 0;
-  my $file = $set::tokenfile;
-  unless (sysopen(my $FH, $file, O_WRONLY | O_APPEND | O_CREAT, 0666)) {
-    $file = '/tmp/ytsheet_token.cgi';
-    sysopen($FH, $file, O_WRONLY | O_APPEND | O_CREAT, 0666);
-  }
-  if($FH){
-    print $FH $token."<>".(time + 60*60*24*7)."<>\n";
-    close($FH);
-  }
-
+  sysopen (my $FH, $set::tokenfile, O_WRONLY | O_APPEND | O_CREAT, 0666);
+  print $FH $token."<>".(time + 60*60*24*7)."<>\n";
+  close($FH);
+  
   return $token;
 }
 
