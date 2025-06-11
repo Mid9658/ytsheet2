@@ -46,6 +46,10 @@ window.addEventListener('DOMContentLoaded',()=>{
   });
   imagePosition();
   setSortable('maneuver','#maneuver-table tbody','tr');
+  if(!document.querySelector('#maneuver-list tr')){
+    const num = Number(form.maneuverNum.value) || 0;
+    for(let i=0; i<num; i++){ addManeuver(); }
+  }
 });
 
 // マニューバ欄 ----------------------------------------
