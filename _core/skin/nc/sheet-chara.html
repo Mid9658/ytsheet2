@@ -36,13 +36,33 @@
       <dl><dt>サブクラス<dd><TMPL_VAR subClass></dl>
     </div>
     <div id="renegade" class="box">
-      <table id="enhancement">
-        <thead><tr><th>武装<th>変異<th>改造</tr></thead>
-        <tbody><tr>
-          <td><TMPL_VAR enhanceArmsTotal></td>
-          <td><TMPL_VAR enhanceMutateTotal></td>
-          <td><TMPL_VAR enhanceModifyTotal></td>
-        </tr></tbody>
+      <table id="enhancement" class="data-table">
+        <thead>
+          <tr><th><th>基本値<th>成長<th>任意<th>合計</tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>武装</th>
+            <td><TMPL_VAR enhanceArms></td>
+            <td><TMPL_VAR enhanceArmsGrow></td>
+            <td><TMPL_IF enhanceAny eq 'arms'>1</TMPL_IF></td>
+            <td><TMPL_VAR enhanceArmsTotal></td>
+          </tr>
+          <tr>
+            <th>変異</th>
+            <td><TMPL_VAR enhanceMutate></td>
+            <td><TMPL_VAR enhanceMutateGrow></td>
+            <td><TMPL_IF enhanceAny eq 'mutate'>1</TMPL_IF></td>
+            <td><TMPL_VAR enhanceMutateTotal></td>
+          </tr>
+          <tr>
+            <th>改造</th>
+            <td><TMPL_VAR enhanceModify></td>
+            <td><TMPL_VAR enhanceModifyGrow></td>
+            <td><TMPL_IF enhanceAny eq 'modify'>1</TMPL_IF></td>
+            <td><TMPL_VAR enhanceModifyTotal></td>
+          </tr>
+        </tbody>
       </table>
       <dl><dt>行動値<dd><TMPL_VAR actionPoint></dl>
       <dl><dt>狂気点<dd><TMPL_VAR madnessPoint></dl>

@@ -45,4 +45,13 @@ window.addEventListener('DOMContentLoaded',()=>{
     form[name].addEventListener('input',calcEnhance);
   });
   imagePosition();
+  setSortable('maneuver','#maneuver-table tbody','tr');
 });
+
+// マニューバ欄 ----------------------------------------
+function addManeuver(){
+  document.querySelector('#maneuver-table tbody').append(createRow('maneuver','maneuverNum'));
+}
+function delManeuver(){
+  delRow('maneuverNum', '#maneuver-table tbody:last-of-type');
+}

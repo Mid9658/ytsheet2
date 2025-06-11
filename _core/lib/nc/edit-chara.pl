@@ -26,6 +26,7 @@ $pc{enhanceArmsGrow}   ||= 0;
 $pc{enhanceMutateGrow} ||= 0;
 $pc{enhanceModifyGrow} ||= 0;
 $pc{enhanceAny}       ||= '';
+$pc{maneuverNum}      ||= 1;
 
 my @classes = (
   'ステーシー','タナトス','ゴシック','レクイエム','バロック','ロマネスク','サイケデリック'
@@ -40,6 +41,30 @@ my %any_checked = (
   mutate => ($pc{enhanceAny} eq 'mutate' ? 'checked' : ''),
   modify => ($pc{enhanceAny} eq 'modify' ? 'checked' : ''),
 );
+
+my @maneuver_rows;
+foreach my $i (1 .. $pc{maneuverNum}){
+  push @maneuver_rows, {
+    ID    => $i,
+    BROKEN=> ($pc{"maneuverBroken$i"} ? 'checked' : ''),
+    USED  => ($pc{"maneuverUsed$i"} ? 'checked' : ''),
+    PART_SKILL => ($pc{"maneuverPart$i"} eq 'スキル' ? 'selected' : ''),
+    PART_HEAD  => ($pc{"maneuverPart$i"} eq '頭' ? 'selected' : ''),
+    PART_ARM   => ($pc{"maneuverPart$i"} eq '腕' ? 'selected' : ''),
+    PART_BODY  => ($pc{"maneuverPart$i"} eq '胴' ? 'selected' : ''),
+    PART_LEG   => ($pc{"maneuverPart$i"} eq '脚' ? 'selected' : ''),
+    NAME   => $pc{"maneuverName$i"},
+    TIMING_AUTO   => ($pc{"maneuverTiming$i"} eq 'オート'     ? 'selected' : ''),
+    TIMING_ACTION => ($pc{"maneuverTiming$i"} eq 'アクション' ? 'selected' : ''),
+    TIMING_RAPID  => ($pc{"maneuverTiming$i"} eq 'ラピッド'   ? 'selected' : ''),
+    TIMING_JUDGE  => ($pc{"maneuverTiming$i"} eq 'ジャッジ'   ? 'selected' : ''),
+    TIMING_DAMAGE => ($pc{"maneuverTiming$i"} eq 'ダメージ'   ? 'selected' : ''),
+    TIMING_REF    => ($pc{"maneuverTiming$i"} eq '効果参照'   ? 'selected' : ''),
+    COST   => $pc{"maneuverCost$i"},
+    RANGE  => $pc{"maneuverRange$i"},
+    NOTE   => $pc{"maneuverNote$i"},
+  };
+}
 
 my $titleName = ($mode eq 'edit') ? '編集' : '新規作成';
 my $passHidden = ($mode eq 'edit' && $pc{protect} eq 'password' && $::in{pass}) ? 1 : 0;
@@ -95,6 +120,8 @@ $tmpl->param(
   enhanceAnyArms   => $any_checked{arms},
   enhanceAnyMutate => $any_checked{mutate},
   enhanceAnyModify => $any_checked{modify},
+  maneuverNum   => $pc{maneuverNum},
+  ManeuverRows  => \@maneuver_rows,
   Menu         => [ { TEXT => '一覧へ', TYPE => 'href', VALUE => './', SIZE => 'small' } ],
 );
 

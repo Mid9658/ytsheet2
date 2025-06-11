@@ -19,12 +19,29 @@ my $tmpl = HTML::Template->new(
   global_vars       => 1,
 );
 
+$pc{maneuverNum} ||= 1;
+my @maneuvers;
+foreach my $i (1 .. $pc{maneuverNum}){
+  next if !existsRow "maneuver$i",'Name','Timing','Cost','Range','Note';
+  push @maneuvers, {
+    BROKEN => ($pc{"maneuverBroken$i"} ? '☑' : ''),
+    USED   => ($pc{"maneuverUsed$i"}  ? '☑' : ''),
+    PART   => $pc{"maneuverPart$i"},
+    NAME   => $pc{"maneuverName$i"},
+    TIMING => $pc{"maneuverTiming$i"},
+    COST   => $pc{"maneuverCost$i"},
+    RANGE  => $pc{"maneuverRange$i"},
+    NOTE   => $pc{"maneuverNote$i"},
+  };
+}
+
 $tmpl->param(
   title        => $set::title,
   ver          => $main::ver,
   coreDir      => $::core_dir,
   titleName    => 'キャラクターシート',
   %pc,
+  Maneuvers   => \@maneuvers,
 );
 
 my @menu;
