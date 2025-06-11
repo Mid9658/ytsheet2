@@ -6,6 +6,9 @@ use HTML::Template;
 our %pc;
 our $mode;
 
+my $mode_make = ($mode =~ /^(?:blanksheet|copy|convert)$/) ? 1 : 0;
+my $token = $mode_make ? tokenMake() : '';
+
 my $titleName = ($mode eq 'edit') ? '編集' : '新規作成';
 
 my $tmpl = HTML::Template->new(
@@ -24,6 +27,8 @@ $tmpl->param(
   titleName    => $titleName,
   ver          => $main::ver,
   coreDir      => $::core_dir,
+  mode         => ($mode eq 'edit' ? 'save' : 'make'),
+  token        => $token,
   id           => $pc{id},
   characterName=> $pc{characterName},
   playerName   => $pc{playerName},
