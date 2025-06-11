@@ -3,10 +3,20 @@ use utf8;
 use open ":utf8";
 use HTML::Template;
 
+my $LOGIN_ID = $::LOGIN_ID;
+
 our %pc;
 our $mode;
 
+my $mode_make = ($mode =~ /^(?:blanksheet|copy|convert)$/) ? 1 : 0;
+my $token = $mode_make ? tokenMake() : '';
+
+if($mode_make){
+  $pc{protect} ||= $LOGIN_ID ? 'account' : 'password';
+}
+
 my $titleName = ($mode eq 'edit') ? '編集' : '新規作成';
+my $passHidden = ($mode eq 'edit' && $pc{protect} eq 'password' && $::in{pass}) ? 1 : 0;
 
 my $tmpl = HTML::Template->new(
   filename          => $::core_dir.'/skin/nc/edit-chara.html',
@@ -24,7 +34,17 @@ $tmpl->param(
   titleName    => $titleName,
   ver          => $main::ver,
   coreDir      => $::core_dir,
+  mode         => ($mode eq 'edit' ? 'save' : 'make'),
+  token        => $token,
   id           => $pc{id},
+  protect      => $pc{protect},
+  protectOld   => $pc{protect},
+  protectAccount  => ($pc{protect} eq 'account' ? 1 : 0),
+  protectPassword => ($pc{protect} eq 'password' ? 1 : 0),
+  protectNone     => ($pc{protect} eq 'none' ? 1 : 0),
+  LOGIN_ID     => $LOGIN_ID,
+  pass         => $::in{pass},
+  passHidden   => $passHidden,
   characterName=> $pc{characterName},
   playerName   => $pc{playerName},
   aka          => $pc{aka},

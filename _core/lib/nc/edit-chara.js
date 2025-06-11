@@ -1,5 +1,6 @@
 "use strict";
-const form = document.forms[0];
+const gameSystem = 'nc';
+const form = document.forms.sheet || document.forms[0];
 const classBonus = {
   'ステーシー':     {arms:1, mutate:1, modify:0},
   'タナトス':      {arms:1, mutate:0, modify:1},

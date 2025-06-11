@@ -16,9 +16,21 @@
 </header>
 <div class="header-back-name"><TMPL_VAR titleName> - <TMPL_VAR title></div>
 <main id="character">
-<form id="edit-form" method="post" action="./">
-<input type="hidden" name="mode" value="make">
+<form name="sheet" id="edit-form" method="post" action="./">
+<input type="hidden" name="mode" value="<TMPL_VAR mode>">
+<TMPL_IF token><input type="hidden" name="_token" value="<TMPL_VAR token>"></TMPL_IF>
 <input type="hidden" name="id" value="<TMPL_VAR id>">
+<details class="box" id="edit-protect">
+  <summary>編集権限</summary>
+  <fieldset id="edit-protect-view">
+    <input type="hidden" name="protectOld" value="<TMPL_VAR protectOld>">
+    <TMPL_IF LOGIN_ID>
+    <label><input type="radio" name="protect" value="account"<TMPL_IF protectAccount> checked</TMPL_IF>> アカウントに紐付ける（ログイン中のみ編集可能）</label><br>
+    </TMPL_IF>
+    <label><input type="radio" name="protect" value="password"<TMPL_IF protectPassword> checked</TMPL_IF>> パスワードで保護</label> <TMPL_IF passHidden><input type="hidden" name="pass" value="<TMPL_VAR pass>"><TMPL_ELSE><input type="password" name="pass"></TMPL_IF><br>
+    <label><input type="radio" name="protect" value="none"<TMPL_IF protectNone> checked</TMPL_IF>> 保護しない（誰でも編集可能）</label>
+  </fieldset>
+</details>
 <article>
 <section id="area-name" class="box color-set">
   <h2>基本情報</h2>

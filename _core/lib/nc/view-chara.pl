@@ -3,6 +3,8 @@ use utf8;
 use open ":utf8";
 use HTML::Template;
 
+my $LOGIN_ID = $::LOGIN_ID;
+
 our %pc = getSheetData();
 
 my $tmpl = HTML::Template->new(
@@ -23,8 +25,16 @@ $tmpl->param(
   coreDir      => $::core_dir,
   titleName    => 'キャラクターシート',
   %pc,
-  Menu         => [ { TEXT => '編集', TYPE => 'href', VALUE => "./?mode=edit&id=$::in{id}", SIZE => 'small' } ],
 );
+
+my @menu;
+if($pc{reqdPassword}){
+  push @menu, { TEXT => '編集', TYPE => 'onclick', VALUE => 'editOn()', SIZE => 'small' };
+}
+else {
+  push @menu, { TEXT => '編集', TYPE => 'href', VALUE => "./?mode=edit&id=$::in{id}", SIZE => 'small' };
+}
+$tmpl->param(Menu => \@menu);
 
 print "Content-Type: text/html\n\n";
 print $tmpl->output;
