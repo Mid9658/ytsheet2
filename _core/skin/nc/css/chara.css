@@ -11,6 +11,10 @@ article {
   grid-gap: 1rem;
 }
 
+#area-name, #tags {
+  grid-column: span 2;
+}
+
 #area-status {
   display: grid;
   grid-template-columns: 1fr 1fr;
