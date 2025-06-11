@@ -117,6 +117,11 @@
       </tr>
     </tbody>
   </table>
+  <div id="enhance-any">
+    <label><input type="radio" name="enhanceAny" value="arms"<TMPL_IF enhanceAnyArms> checked</TMPL_IF>>武装</label>
+    <label><input type="radio" name="enhanceAny" value="mutate"<TMPL_IF enhanceAnyMutate> checked</TMPL_IF>>変異</label>
+    <label><input type="radio" name="enhanceAny" value="modify"<TMPL_IF enhanceAnyModify> checked</TMPL_IF>>改造</label>
+  </div>
   <dl>
     <dt>行動値<dd><input type="number" name="actionPoint" value="<TMPL_VAR actionPoint>">
     <dt>狂気点<dd><input type="number" name="madnessPoint" value="<TMPL_VAR madnessPoint>">
