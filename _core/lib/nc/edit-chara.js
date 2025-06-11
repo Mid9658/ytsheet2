@@ -23,6 +23,16 @@ function calcEnhance(){
   form.enhanceArms.value = arms;
   form.enhanceMutate.value = mutate;
   form.enhanceModify.value = modify;
+  document.getElementById('enhance-arms-base').value = arms;
+  document.getElementById('enhance-mutate-base').value = mutate;
+  document.getElementById('enhance-modify-base').value = modify;
+
+  const armsGrow   = Number(form.enhanceArmsGrow.value)   || 0;
+  const mutateGrow = Number(form.enhanceMutateGrow.value) || 0;
+  const modifyGrow = Number(form.enhanceModifyGrow.value) || 0;
+  document.getElementById('enhance-arms-total').textContent   = arms   + armsGrow;
+  document.getElementById('enhance-mutate-total').textContent = mutate + mutateGrow;
+  document.getElementById('enhance-modify-total').textContent = modify + modifyGrow;
 }
 window.addEventListener('DOMContentLoaded',()=>{
   calcEnhance();
@@ -31,4 +41,8 @@ window.addEventListener('DOMContentLoaded',()=>{
   document.querySelectorAll('input[name="enhanceAny"]').forEach(r=>{
     r.addEventListener('change',calcEnhance);
   });
+  ['enhanceArmsGrow','enhanceMutateGrow','enhanceModifyGrow'].forEach(name=>{
+    form[name].addEventListener('input',calcEnhance);
+  });
+  imagePosition();
 });
