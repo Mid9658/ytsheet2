@@ -15,8 +15,36 @@ if($mode_make){
   $pc{protect} ||= $LOGIN_ID ? 'account' : 'password';
 }
 
+## 画像初期値
+$pc{imageFit}      = $pc{imageFit} eq 'percent' ? 'percentX' : $pc{imageFit};
+$pc{imagePercent}   //= '200';
+$pc{imagePositionX} //= '50';
+$pc{imagePositionY} //= '50';
+$pc{wordsX} ||= '右';
+$pc{wordsY} ||= '上';
+$pc{enhanceArmsGrow}   ||= 0;
+$pc{enhanceMutateGrow} ||= 0;
+$pc{enhanceModifyGrow} ||= 0;
+$pc{enhanceAny}       ||= '';
+
+my @classes = (
+  'ステーシー','タナトス','ゴシック','レクイエム','バロック','ロマネスク','サイケデリック'
+);
+my %main_selected; my %sub_selected;
+foreach my $i (0..$#classes){
+  $main_selected{$i+1} = 'selected' if $pc{mainClass} eq $classes[$i];
+  $sub_selected{$i+1}  = 'selected' if $pc{subClass}  eq $classes[$i];
+}
+my %any_checked = (
+  arms   => ($pc{enhanceAny} eq 'arms'   ? 'checked' : ''),
+  mutate => ($pc{enhanceAny} eq 'mutate' ? 'checked' : ''),
+  modify => ($pc{enhanceAny} eq 'modify' ? 'checked' : ''),
+);
+
 my $titleName = ($mode eq 'edit') ? '編集' : '新規作成';
 my $passHidden = ($mode eq 'edit' && $pc{protect} eq 'password' && $::in{pass}) ? 1 : 0;
+
+my $imageForm = imageForm($pc{imageURL});
 
 my $tmpl = HTML::Template->new(
   filename          => $::core_dir.'/skin/nc/edit-chara.html',
@@ -53,10 +81,20 @@ $tmpl->param(
   enhanceArms  => $pc{enhanceArms},
   enhanceMutate=> $pc{enhanceMutate},
   enhanceModify=> $pc{enhanceModify},
+  enhanceArmsGrow   => $pc{enhanceArmsGrow},
+  enhanceMutateGrow => $pc{enhanceMutateGrow},
+  enhanceModifyGrow => $pc{enhanceModifyGrow},
   actionPoint  => $pc{actionPoint},
   madnessPoint => $pc{madnessPoint},
+  imageURL     => $pc{imageURL},
+  imageForm    => $imageForm,
   memory       => $pc{memory},
   freeNote     => $pc{freeNote},
+  map { ("mainClassSelected".($_+1) => $main_selected{$_+1}) } 0..$#classes,
+  map { ("subClassSelected" .($_+1) => $sub_selected{$_+1})  } 0..$#classes,
+  enhanceAnyArms   => $any_checked{arms},
+  enhanceAnyMutate => $any_checked{mutate},
+  enhanceAnyModify => $any_checked{modify},
   Menu         => [ { TEXT => '一覧へ', TYPE => 'href', VALUE => './', SIZE => 'small' } ],
 );
 

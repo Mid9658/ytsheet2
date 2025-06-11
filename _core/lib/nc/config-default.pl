@@ -36,6 +36,10 @@ our $lib_view      = $::core_dir . '/lib/view.pl';
 our $lib_view_char = $::core_dir . '/lib/nc/view-chara.pl';
 our $lib_palette   = $::core_dir . '/lib/palette.pl';
 
+## ●画像関係
+# キャラクター画像のファイルサイズ上限(単位byte)
+our $image_maxsize = 1024 * 1024 * 1;
+
 # 一覧表示用ライブラリ
 our $lib_list_char = $::core_dir . '/lib/nc/list-chara.pl';
 
