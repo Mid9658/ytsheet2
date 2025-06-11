@@ -17,11 +17,16 @@
 <main id="character">
 <article>
   <div id="area-name" class="color-set">
-    <h1 id="character-name"><TMPL_IF aka>“<TMPL_VAR aka>”</TMPL_IF><TMPL_VAR characterName></h1>
+    <h1 id="character-name"><TMPL_VAR characterName></h1>
     <div>
       <p id="update-time"><time><TMPL_VAR updateTime></time></p>
       <p id="player-name">プレイヤー：<TMPL_VAR playerName></p>
     </div>
+  </div>
+
+  <div id="tags">
+    <TMPL_IF group><a id="group" href="./?group=<TMPL_VAR group>"><TMPL_VAR groupName></a></TMPL_IF>
+    <TMPL_LOOP Tags><a class="tag" href="./?tag=<TMPL_VAR URL>"><TMPL_VAR TEXT></a></TMPL_LOOP>
   </div>
 
   <div id="area-status">
