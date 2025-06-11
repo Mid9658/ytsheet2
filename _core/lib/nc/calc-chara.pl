@@ -42,13 +42,26 @@ sub data_calc {
   );
 
   my ($arms, $mutate, $modify) = (0,0,0);
-  foreach my $cls ($pc{mainClass}, $pc{subClass}){
-    if(my $b = $class_bonus{$cls}){
-      $arms   += $b->{arms};
-      $mutate += $b->{mutate};
-      $modify += $b->{modify};
-    }
+  my %main_bonus;
+  my %sub_bonus;
+  if(my $b = $class_bonus{$pc{mainClass}}){
+    %main_bonus = %{$b};
+    $arms   += $b->{arms};
+    $mutate += $b->{mutate};
+    $modify += $b->{modify};
   }
+  if(my $b = $class_bonus{$pc{subClass}}){
+    %sub_bonus = %{$b};
+    $arms   += $b->{arms};
+    $mutate += $b->{mutate};
+    $modify += $b->{modify};
+  }
+  $pc{mainClassArms}   = $main_bonus{arms}   || 0;
+  $pc{mainClassMutate} = $main_bonus{mutate} || 0;
+  $pc{mainClassModify} = $main_bonus{modify} || 0;
+  $pc{subClassArms}    = $sub_bonus{arms}    || 0;
+  $pc{subClassMutate}  = $sub_bonus{mutate}  || 0;
+  $pc{subClassModify}  = $sub_bonus{modify}  || 0;
   if   ($pc{enhanceAny} eq 'arms'  ){ $arms++;   }
   elsif($pc{enhanceAny} eq 'mutate'){ $mutate++; }
   elsif($pc{enhanceAny} eq 'modify'){ $modify++; }

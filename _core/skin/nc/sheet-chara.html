@@ -31,40 +31,52 @@
 
   <div id="area-status">
     <div id="image" class="image" style="background-image:url(<TMPL_VAR imageSrc>);"></div>
-    <div id="personal" class="box">
-      <dl><dt>年齢<dd><TMPL_VAR age></dl>
-      <dl><dt>性別<dd><TMPL_VAR gender></dl>
-    </div>
-    <div id="works-cover" class="box">
-      <dl><dt>ポジション<dd><TMPL_VAR position></dl>
-      <dl><dt>メインクラス<dd><TMPL_VAR mainClass></dl>
-      <dl><dt>サブクラス<dd><TMPL_VAR subClass></dl>
+    <div id="personal" class="box-union">
+      <dl class="box"><dt>年齢<dd><TMPL_VAR age></dl>
+      <dl class="box"><dt>性別<dd><TMPL_VAR gender></dl>
     </div>
     <div id="renegade" class="box">
-      <table id="enhancement" class="data-table">
+      <table id="class-enhance" class="data-table">
         <thead>
-          <tr><th><th>基本値<th>成長<th>任意<th>合計</tr>
+          <tr><th colspan="5">ポジション・クラス／強化値</th></tr>
+          <tr><th></th><th></th><th>武装</th><th>変異</th><th>改造</th></tr>
         </thead>
         <tbody>
           <tr>
-            <th>武装</th>
-            <td><TMPL_VAR enhanceArms></td>
+            <th>ポジション</th>
+            <td><TMPL_VAR position></td>
+            <td></td><td></td><td></td>
+          </tr>
+          <tr>
+            <th>メインクラス</th>
+            <td><TMPL_VAR mainClass></td>
+            <td><TMPL_VAR mainClassArms></td>
+            <td><TMPL_VAR mainClassMutate></td>
+            <td><TMPL_VAR mainClassModify></td>
+          </tr>
+          <tr>
+            <th>サブクラス</th>
+            <td><TMPL_VAR subClass></td>
+            <td><TMPL_VAR subClassArms></td>
+            <td><TMPL_VAR subClassMutate></td>
+            <td><TMPL_VAR subClassModify></td>
+          </tr>
+          <tr>
+            <th colspan="2">任意選択ボーナス</th>
+            <td><TMPL_IF enhanceAny eq 'arms'>+1</TMPL_IF></td>
+            <td><TMPL_IF enhanceAny eq 'mutate'>+1</TMPL_IF></td>
+            <td><TMPL_IF enhanceAny eq 'modify'>+1</TMPL_IF></td>
+          </tr>
+          <tr>
+            <th colspan="2">成長</th>
             <td><TMPL_VAR enhanceArmsGrow></td>
-            <td><TMPL_IF enhanceAny eq 'arms'>1</TMPL_IF></td>
-            <td><TMPL_VAR enhanceArmsTotal></td>
-          </tr>
-          <tr>
-            <th>変異</th>
-            <td><TMPL_VAR enhanceMutate></td>
             <td><TMPL_VAR enhanceMutateGrow></td>
-            <td><TMPL_IF enhanceAny eq 'mutate'>1</TMPL_IF></td>
-            <td><TMPL_VAR enhanceMutateTotal></td>
+            <td><TMPL_VAR enhanceModifyGrow></td>
           </tr>
           <tr>
-            <th>改造</th>
-            <td><TMPL_VAR enhanceModify></td>
-            <td><TMPL_VAR enhanceModifyGrow></td>
-            <td><TMPL_IF enhanceAny eq 'modify'>1</TMPL_IF></td>
+            <th colspan="2">合計</th>
+            <td><TMPL_VAR enhanceArmsTotal></td>
+            <td><TMPL_VAR enhanceMutateTotal></td>
             <td><TMPL_VAR enhanceModifyTotal></td>
           </tr>
         </tbody>

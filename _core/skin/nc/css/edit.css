@@ -52,6 +52,14 @@ body:not([data-create-type="F"]) .fullscratch-only {
 }
 #syndrome-status { grid-area: SYN; }
 
+#personal {
+  display: flex;
+  gap: .5em;
+}
+#personal dl {
+  flex: 1;
+}
+
 
 @media screen and (width <= 735px){
   #area-status {

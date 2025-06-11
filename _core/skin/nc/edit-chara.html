@@ -80,13 +80,20 @@
 <section id="area-status" class="box">
   <h2>ステータス</h2>
   <TMPL_VAR imageForm>
-  <dl>
-    <dt>年齢<dd><input type="text" name="age" value="<TMPL_VAR age>">
-    <dt>性別<dd><input type="text" name="gender" value="<TMPL_VAR gender>">
-  </dl>
-  <dl>
-    <dt>ポジション<dd>
-      <select name="position">
+  <div id="personal" class="box-union">
+    <dl class="box"><dt>年齢<dd><input type="text" name="age" value="<TMPL_VAR age>"></dl>
+    <dl class="box"><dt>性別<dd><input type="text" name="gender" value="<TMPL_VAR gender>"></dl>
+  </div>
+  <table id="class-enhance" class="edit-table">
+    <thead>
+      <tr><th colspan="5">ポジション・クラス／強化値</th></tr>
+      <tr><th></th><th></th><th>武装</th><th>変異</th><th>改造</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>ポジション</th>
+        <td>
+          <select name="position">
         <option value="">--</option>
         <option>アリス</option>
         <option>ホリック</option>
@@ -95,8 +102,13 @@
         <option>コート</option>
         <option>ソロリティ</option>
       </select>
-    <dt>メインクラス<dd>
-      <select name="mainClass">
+        </td>
+        <td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <th>メインクラス</th>
+        <td>
+          <select name="mainClass">
         <option value="">--</option>
         <option value="ステーシー" <TMPL_VAR mainClassSelected1>>ステーシー</option>
         <option value="タナトス" <TMPL_VAR mainClassSelected2>>タナトス</option>
@@ -106,8 +118,15 @@
         <option value="ロマネスク" <TMPL_VAR mainClassSelected6>>ロマネスク</option>
         <option value="サイケデリック" <TMPL_VAR mainClassSelected7>>サイケデリック</option>
       </select>
-    <dt>サブクラス<dd>
-      <select name="subClass">
+        </td>
+        <td id="main-class-arms"></td>
+        <td id="main-class-mutate"></td>
+        <td id="main-class-modify"></td>
+      </tr>
+      <tr>
+        <th>サブクラス</th>
+        <td>
+          <select name="subClass">
         <option value="">--</option>
         <option value="ステーシー" <TMPL_VAR subClassSelected1>>ステーシー</option>
         <option value="タナトス" <TMPL_VAR subClassSelected2>>タナトス</option>
@@ -117,40 +136,34 @@
         <option value="ロマネスク" <TMPL_VAR subClassSelected6>>ロマネスク</option>
         <option value="サイケデリック" <TMPL_VAR subClassSelected7>>サイケデリック</option>
       </select>
-  </dl>
-  <table id="enhancement" class="edit-table">
-    <thead>
-      <tr><th><th>基本値<th>成長<th>任意<th>合計</tr>
-    </thead>
-    <tbody>
-      <tr id="enhance-arms-row">
-        <th>武装</th>
-        <td><input type="number" name="enhanceArms" id="enhance-arms-base" readonly></td>
+        </td>
+        <td id="sub-class-arms"></td>
+        <td id="sub-class-mutate"></td>
+        <td id="sub-class-modify"></td>
+      </tr>
+      <tr>
+        <th colspan="2">任意選択ボーナス</th>
+        <td class="radio"><input type="radio" name="enhanceAny" value="arms"<TMPL_IF enhanceAnyArms> checked</TMPL_IF>>+1</td>
+        <td class="radio"><input type="radio" name="enhanceAny" value="mutate"<TMPL_IF enhanceAnyMutate> checked</TMPL_IF>>+1</td>
+        <td class="radio"><input type="radio" name="enhanceAny" value="modify"<TMPL_IF enhanceAnyModify> checked</TMPL_IF>>+1</td>
+      </tr>
+      <tr>
+        <th colspan="2">成長</th>
         <td><input type="number" name="enhanceArmsGrow" value="<TMPL_VAR enhanceArmsGrow>"></td>
-        <td class="radio"><input type="radio" name="enhanceAny" value="arms"<TMPL_IF enhanceAnyArms> checked</TMPL_IF>></td>
-        <td id="enhance-arms-total"></td>
-      </tr>
-      <tr id="enhance-mutate-row">
-        <th>変異</th>
-        <td><input type="number" name="enhanceMutate" id="enhance-mutate-base" readonly></td>
         <td><input type="number" name="enhanceMutateGrow" value="<TMPL_VAR enhanceMutateGrow>"></td>
-        <td class="radio"><input type="radio" name="enhanceAny" value="mutate"<TMPL_IF enhanceAnyMutate> checked</TMPL_IF>></td>
-        <td id="enhance-mutate-total"></td>
-      </tr>
-      <tr id="enhance-modify-row">
-        <th>改造</th>
-        <td><input type="number" name="enhanceModify" id="enhance-modify-base" readonly></td>
         <td><input type="number" name="enhanceModifyGrow" value="<TMPL_VAR enhanceModifyGrow>"></td>
-        <td class="radio"><input type="radio" name="enhanceAny" value="modify"<TMPL_IF enhanceAnyModify> checked</TMPL_IF>></td>
+      </tr>
+      <tr>
+        <th colspan="2">合計</th>
+        <td id="enhance-arms-total"></td>
+        <td id="enhance-mutate-total"></td>
         <td id="enhance-modify-total"></td>
       </tr>
     </tbody>
   </table>
-  <div id="enhance-any">
-    <label><input type="radio" name="enhanceAny" value="arms"<TMPL_IF enhanceAnyArms> checked</TMPL_IF>>武装</label>
-    <label><input type="radio" name="enhanceAny" value="mutate"<TMPL_IF enhanceAnyMutate> checked</TMPL_IF>>変異</label>
-    <label><input type="radio" name="enhanceAny" value="modify"<TMPL_IF enhanceAnyModify> checked</TMPL_IF>>改造</label>
-  </div>
+  <input type="hidden" name="enhanceArms" id="enhance-arms-base">
+  <input type="hidden" name="enhanceMutate" id="enhance-mutate-base">
+  <input type="hidden" name="enhanceModify" id="enhance-modify-base">
   <dl>
     <dt>行動値<dd><input type="number" name="actionPoint" value="<TMPL_VAR actionPoint>">
     <dt>狂気点<dd><input type="number" name="madnessPoint" value="<TMPL_VAR madnessPoint>">
