@@ -16,6 +16,7 @@ if($mode_make){
 }
 
 my $titleName = ($mode eq 'edit') ? '編集' : '新規作成';
+my $passHidden = ($mode eq 'edit' && $pc{protect} eq 'password' && $::in{pass}) ? 1 : 0;
 
 my $tmpl = HTML::Template->new(
   filename          => $::core_dir.'/skin/nc/edit-chara.html',
@@ -43,6 +44,7 @@ $tmpl->param(
   protectNone     => ($pc{protect} eq 'none' ? 1 : 0),
   LOGIN_ID     => $LOGIN_ID,
   pass         => $::in{pass},
+  passHidden   => $passHidden,
   characterName=> $pc{characterName},
   playerName   => $pc{playerName},
   aka          => $pc{aka},

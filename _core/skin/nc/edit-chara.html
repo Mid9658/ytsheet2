@@ -27,7 +27,7 @@
     <TMPL_IF LOGIN_ID>
     <label><input type="radio" name="protect" value="account"<TMPL_IF protectAccount> checked</TMPL_IF>> アカウントに紐付ける（ログイン中のみ編集可能）</label><br>
     </TMPL_IF>
-    <label><input type="radio" name="protect" value="password"<TMPL_IF protectPassword> checked</TMPL_IF>> パスワードで保護</label> <input type="password" name="pass"><br>
+    <label><input type="radio" name="protect" value="password"<TMPL_IF protectPassword> checked</TMPL_IF>> パスワードで保護</label> <TMPL_IF passHidden><input type="hidden" name="pass" value="<TMPL_VAR pass>"><TMPL_ELSE><input type="password" name="pass"></TMPL_IF><br>
     <label><input type="radio" name="protect" value="none"<TMPL_IF protectNone> checked</TMPL_IF>> 保護しない（誰でも編集可能）</label>
   </fieldset>
 </details>
