@@ -24,7 +24,7 @@
 </header>
 <div class="header-back-name"><TMPL_VAR titleName> - <TMPL_VAR title></div>
 <main id="character">
-<form name="sheet" id="edit-form" method="post" action="./">
+<form name="sheet" id="edit-form" method="post" action="./" enctype="multipart/form-data">
 <input type="hidden" name="mode" value="<TMPL_VAR mode>">
 <TMPL_IF token><input type="hidden" name="_token" value="<TMPL_VAR token>"></TMPL_IF>
 <input type="hidden" name="id" value="<TMPL_VAR id>">

@@ -1,4 +1,5 @@
 use strict;
+use subs qw/existsRow/;
 use utf8;
 use open ":utf8";
 use HTML::Template;
