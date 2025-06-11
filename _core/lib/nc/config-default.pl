@@ -43,4 +43,12 @@ our $image_maxsize = 1024 * 1024 * 1;
 # 一覧表示用ライブラリ
 our $lib_list_char = $::core_dir . '/lib/nc/list-chara.pl';
 
+## ●グループ関連
+our @groups = (
+  ['pc',  '01', 'ＰＣ', 'プレイヤーキャラクター'],
+  ['npc', '99', 'ＮＰＣ', 'ノンプレイヤーキャラクター'],
+);
+
+our $group_default = 'pc';
+
 1;

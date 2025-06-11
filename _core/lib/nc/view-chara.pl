@@ -19,7 +19,7 @@ my $tmpl = HTML::Template->new(
   global_vars       => 1,
 );
 
-$pc{maneuverNum} ||= 1;
+$pc{maneuverNum} ||= 3;
 my @maneuvers;
 foreach my $i (1 .. $pc{maneuverNum}){
   next if !existsRow "maneuver$i",'Name','Timing','Cost','Range','Note';
@@ -35,12 +35,24 @@ foreach my $i (1 .. $pc{maneuverNum}){
   };
 }
 
+if(!$pc{group}){
+  $pc{group} = $set::group_default;
+}
+my $group_name = '';
+foreach (@set::groups){
+  if($pc{group} eq @$_[0]){ $group_name = @$_[2]; last; }
+}
+my @tags;
+foreach(split(/ /, $pc{tags})){ push @tags, { URL => uri_escape_utf8($_), TEXT => $_ }; }
+
 $tmpl->param(
   title        => $set::title,
   ver          => $main::ver,
   coreDir      => $::core_dir,
   titleName    => 'キャラクターシート',
   %pc,
+  groupName   => $group_name,
+  Tags        => \@tags,
   Maneuvers   => \@maneuvers,
 );
 

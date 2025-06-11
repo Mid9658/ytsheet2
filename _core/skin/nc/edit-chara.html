@@ -39,15 +39,44 @@
     <label><input type="radio" name="protect" value="none"<TMPL_IF protectNone> checked</TMPL_IF>> 保護しない（誰でも編集可能）</label>
   </fieldset>
 </details>
-<article>
-<section id="area-name" class="box color-set">
-  <h2>基本情報</h2>
+<dl class="box" id="hide-options">
+  <dt>閲覧可否設定</dt>
+  <dd id="forbidden-checkbox">
+    <select name="forbidden">
+      <option value="">内容を全て開示
+      <option value="battle" <TMPL_IF forbiddenBattle>selected</TMPL_IF>>データ・数値のみ秘匿
+      <option value="all"    <TMPL_IF forbiddenAll>selected</TMPL_IF>>内容を全て秘匿
+    </select>
+  </dd>
+  <dd id="hide-checkbox">
+    <select name="hide">
+      <option value="">一覧に表示
+      <option value="1" <TMPL_IF hide>selected</TMPL_IF>>一覧には非表示
+    </select>
+  </dd>
+  <dd>※「一覧に非表示」でもタグ検索結果・マイリストには表示されます</dd>
+</dl>
+<div class="box" id="group">
   <dl>
-    <dt>キャラクター名<dd><input type="text" name="characterName" value="<TMPL_VAR characterName>">
-    <dt>プレイヤー名<dd><input type="text" name="playerName" value="<TMPL_VAR playerName>">
-    <dt>コードネーム<dd><input type="text" name="aka" value="<TMPL_VAR aka>">
+    <dt>グループ<dd><select name="group">
+      <TMPL_LOOP Groups><option value="<TMPL_VAR ID>"<TMPL_IF SELECTED> selected</TMPL_IF>><TMPL_VAR NAME></option></TMPL_LOOP>
+    </select>
+    <dt>タグ<dd><input type="text" name="tags" value="<TMPL_VAR tags>">
   </dl>
-</section>
+</div>
+<div class="box in-toc" id="name-form" data-content-title="キャラクター名・プレイヤー名">
+  <div>
+    <dl id="character-name">
+      <dt>キャラクター名
+      <dd><input type="text" name="characterName" value="<TMPL_VAR characterName>">
+    </dl>
+  </div>
+  <dl id="player-name">
+    <dt>プレイヤー名
+    <dd><input type="text" name="playerName" value="<TMPL_VAR playerName>">
+  </dl>
+</div>
+<article>
 <section id="area-status" class="box">
   <h2>ステータス</h2>
   <TMPL_VAR imageForm>

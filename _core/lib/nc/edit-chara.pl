@@ -26,7 +26,11 @@ $pc{enhanceArmsGrow}   ||= 0;
 $pc{enhanceMutateGrow} ||= 0;
 $pc{enhanceModifyGrow} ||= 0;
 $pc{enhanceAny}       ||= '';
-$pc{maneuverNum}      ||= 1;
+$pc{maneuverNum}      ||= 3;
+$pc{forbidden}        ||= '';
+$pc{group}            ||= $set::group_default if defined $set::group_default;
+$pc{tags}             ||= '';
+$pc{hide}             ||= 0;
 
 my @classes = (
   'ステーシー','タナトス','ゴシック','レクイエム','バロック','ロマネスク','サイケデリック'
@@ -41,6 +45,13 @@ my %any_checked = (
   mutate => ($pc{enhanceAny} eq 'mutate' ? 'checked' : ''),
   modify => ($pc{enhanceAny} eq 'modify' ? 'checked' : ''),
 );
+
+my @groups;
+foreach (@set::groups){
+  my ($id, undef, $name, undef, $exclusive) = @$_;
+  next if($exclusive && (!$LOGIN_ID || $LOGIN_ID !~ /^($exclusive)$/));
+  push @groups, { ID=>$id, NAME=>$name, SELECTED=>($pc{group} eq $id ? 1:0) };
+}
 
 my @maneuver_rows;
 foreach my $i (1 .. $pc{maneuverNum}){
@@ -100,7 +111,6 @@ $tmpl->param(
   passHidden   => $passHidden,
   characterName=> $pc{characterName},
   playerName   => $pc{playerName},
-  aka          => $pc{aka},
   age          => $pc{age},
   gender       => $pc{gender},
   enhanceArms  => $pc{enhanceArms},
@@ -115,6 +125,10 @@ $tmpl->param(
   imageForm    => $imageForm,
   memory       => $pc{memory},
   freeNote     => $pc{freeNote},
+  forbidden    => $pc{forbidden},
+  hide         => $pc{hide},
+  group        => $pc{group},
+  tags         => $pc{tags},
   map { ("mainClassSelected".($_+1) => $main_selected{$_+1}) } 0..$#classes,
   map { ("subClassSelected" .($_+1) => $sub_selected{$_+1})  } 0..$#classes,
   enhanceAnyArms   => $any_checked{arms},
@@ -122,6 +136,9 @@ $tmpl->param(
   enhanceAnyModify => $any_checked{modify},
   maneuverNum   => $pc{maneuverNum},
   ManeuverRows  => \@maneuver_rows,
+  Groups       => \@groups,
+  forbiddenBattle => ($pc{forbidden} eq 'battle' ? 1 : 0),
+  forbiddenAll    => ($pc{forbidden} eq 'all'    ? 1 : 0),
   Menu         => [ { TEXT => '一覧へ', TYPE => 'href', VALUE => './', SIZE => 'small' } ],
 );
 
