@@ -8,6 +8,13 @@ my $LOGIN_ID = $::LOGIN_ID;
 
 our %pc = getSheetData();
 
+# 任意選択ボーナスの表示用
+my %enhance_any_mark = (
+  arms   => ($pc{enhanceAny} eq 'arms'   ? '+1' : ''),
+  mutate => ($pc{enhanceAny} eq 'mutate' ? '+1' : ''),
+  modify => ($pc{enhanceAny} eq 'modify' ? '+1' : ''),
+);
+
 my $tmpl = HTML::Template->new(
   filename          => $set::skin_sheet,
   utf8              => 1,
@@ -79,6 +86,9 @@ $tmpl->param(
   Maneuvers   => \@maneuvers,
   MemoryRows  => \@memory_rows,
   FetterRows  => \@fetter_rows,
+  enhanceAnyArms   => $enhance_any_mark{arms},
+  enhanceAnyMutate => $enhance_any_mark{mutate},
+  enhanceAnyModify => $enhance_any_mark{modify},
 );
 
 my @menu;
