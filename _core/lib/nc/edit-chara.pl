@@ -42,10 +42,17 @@ $pc{hide}             ||= 0;
 my @classes = (
   'ステーシー','タナトス','ゴシック','レクイエム','バロック','ロマネスク','サイケデリック'
 );
+my @positions = (
+  'アリス','ホリック','オートマトン','ジャンク','コート','ソロリティ'
+);
 my %main_selected; my %sub_selected;
 foreach my $i (0..$#classes){
   $main_selected{$i+1} = 'selected' if $pc{mainClass} eq $classes[$i];
   $sub_selected{$i+1}  = 'selected' if $pc{subClass}  eq $classes[$i];
+}
+my %position_selected;
+foreach my $i (0..$#positions){
+  $position_selected{$i+1} = 'selected' if $pc{position} eq $positions[$i];
 }
 my %any_checked = (
   arms   => ($pc{enhanceAny} eq 'arms'   ? 'checked' : ''),
@@ -206,6 +213,8 @@ $tmpl->param(
   hide         => $pc{hide},
   group        => $pc{group},
   tags         => $pc{tags},
+  position     => $pc{position},
+  map { ("positionSelected".($_+1) => $position_selected{$_+1}) } 0..$#positions,
   map { ("mainClassSelected".($_+1) => $main_selected{$_+1}) } 0..$#classes,
   map { ("subClassSelected" .($_+1) => $sub_selected{$_+1})  } 0..$#classes,
   enhanceAnyArms   => $any_checked{arms},
