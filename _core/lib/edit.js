@@ -1,4 +1,5 @@
 "use strict";
+if(typeof window.gameSystem === 'undefined') window.gameSystem = '';
 const form = document.sheet;
 let sheetType;
 window.addEventListener('load', function(e) {

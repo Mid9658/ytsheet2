@@ -1,6 +1,6 @@
 "use strict";
 const gameSystem = 'nc';
-const form = document.forms.sheet || document.forms[0];
+// NOTE: 'form' is provided by the common edit.js
 const classBonus = {
   'ステーシー':     {arms:1, mutate:1, modify:0},
   'タナトス':      {arms:1, mutate:0, modify:1},
@@ -54,15 +54,17 @@ window.onload = function() {
   ['enhanceArmsGrow','enhanceMutateGrow','enhanceModifyGrow'].forEach(name=>{
     form[name].addEventListener('input',calcEnhance);
   });
-  imagePosition(1);
-  setSortable('maneuver','#maneuver-table tbody','tr');
+  if(typeof imagePosition === 'function'){ imagePosition(1); }
+  if(typeof setSortable === 'function'){
+    setSortable('maneuver','#maneuver-table tbody','tr');
+    setSortable('memory','#memory-table tbody','tr');
+  }
   if(!document.querySelector('#maneuver-list tr')){
-    const num = Number(form.maneuverNum.value) || 0;
+    const num = Math.max(Number(form.maneuverNum.value) || 0, 1);
     for(let i=0; i<num; i++){ addManeuver(); }
   }
-  setSortable('memory','#memory-table tbody','tr');
   if(!document.querySelector('#memory-list tr')){
-    const num = Number(form.memoryNum.value) || 0;
+    const num = Math.max(Number(form.memoryNum.value) || 0, 1);
     for(let i=0; i<num; i++){ addMemory(); }
   }
 };
