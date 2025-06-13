@@ -18,12 +18,12 @@ function calcEnhance(){
   if(mainB){ main=mainB; arms+=mainB.arms; mutate+=mainB.mutate; modify+=mainB.modify; }
   const subB  = classBonus[form.subClass.value];
   if(subB){ sub=subB; arms+=subB.arms; mutate+=subB.mutate; modify+=subB.modify; }
-  document.getElementById('main-class-arms').textContent   = main.arms   || '';
-  document.getElementById('main-class-mutate').textContent = main.mutate || '';
-  document.getElementById('main-class-modify').textContent = main.modify || '';
-  document.getElementById('sub-class-arms').textContent    = sub.arms    || '';
-  document.getElementById('sub-class-mutate').textContent  = sub.mutate  || '';
-  document.getElementById('sub-class-modify').textContent  = sub.modify  || '';
+  document.getElementById('main-class-arms').textContent   = main.arms   ?? '';
+  document.getElementById('main-class-mutate').textContent = main.mutate ?? '';
+  document.getElementById('main-class-modify').textContent = main.modify ?? '';
+  document.getElementById('sub-class-arms').textContent    = sub.arms    ?? '';
+  document.getElementById('sub-class-mutate').textContent  = sub.mutate  ?? '';
+  document.getElementById('sub-class-modify').textContent  = sub.modify  ?? '';
   const any = form.enhanceAny.value;
   if(any==='arms'){ arms++; }
   else if(any==='mutate'){ mutate++; }
