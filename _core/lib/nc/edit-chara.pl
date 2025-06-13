@@ -5,8 +5,10 @@ use HTML::Template;
 
 my $LOGIN_ID = $::LOGIN_ID;
 
-our %pc;
-our $mode;
+### データ読み込み ###############################################################
+my ($data, $mode, $file, $message) = getSheetData($::in{mode});
+our %pc = %{ $data };
+##
 
 my $mode_make = ($mode =~ /^(?:blanksheet|copy|convert)$/) ? 1 : 0;
 my $token = $mode_make ? tokenMake() : '';
