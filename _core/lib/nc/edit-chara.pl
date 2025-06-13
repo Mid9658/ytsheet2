@@ -196,7 +196,6 @@ $tmpl->param(
   enhanceMutateGrow => $pc{enhanceMutateGrow},
   enhanceModifyGrow => $pc{enhanceModifyGrow},
   actionPoint  => $pc{actionPoint},
-  madnessPoint => $pc{madnessPoint},
   imageURL     => $pc{imageURL},
   imageForm    => $imageForm,
   memoryNum    => $pc{memoryNum},

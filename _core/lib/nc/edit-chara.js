@@ -74,7 +74,7 @@ function addManeuver(){
   document.querySelector('#maneuver-table tbody').append(createRow('maneuver','maneuverNum'));
 }
 function delManeuver(){
-  delRow('maneuverNum', '#maneuver-table tbody:last-of-type');
+  delRow('maneuverNum', '#maneuver-list tr:last-of-type');
 }
 
 // 記憶のカケラ欄 ----------------------------------------
@@ -82,5 +82,5 @@ function addMemory(){
   document.querySelector('#memory-table tbody').append(createRow('memory','memoryNum',6));
 }
 function delMemory(){
-  delRow('memoryNum', '#memory-table tbody:last-of-type',2);
+  delRow('memoryNum', '#memory-list tr:last-of-type',2);
 }
