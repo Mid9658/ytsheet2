@@ -32,8 +32,8 @@
   <div id="area-status">
     <div id="image" class="image" style="background-image:url(<TMPL_VAR imageSrc>);"></div>
     <div id="personal" class="box-union">
-      <dl class="box"><dt>年齢<dd><TMPL_VAR age></dl>
-      <dl class="box"><dt>性別<dd><TMPL_VAR gender></dl>
+      <dl class="box" id="age"><dt>年齢<dd><TMPL_VAR age></dl>
+      <dl class="box" id="gender"><dt>性別<dd><TMPL_VAR gender></dl>
     </div>
     <div id="renegade" class="box">
       <table id="class-enhance" class="data-table">
@@ -63,9 +63,9 @@
           </tr>
           <tr>
             <th colspan="2">任意選択ボーナス</th>
-            <td><TMPL_IF enhanceAny eq 'arms'>+1</TMPL_IF></td>
-            <td><TMPL_IF enhanceAny eq 'mutate'>+1</TMPL_IF></td>
-            <td><TMPL_IF enhanceAny eq 'modify'>+1</TMPL_IF></td>
+            <td><TMPL_VAR enhanceAnyArms></td>
+            <td><TMPL_VAR enhanceAnyMutate></td>
+            <td><TMPL_VAR enhanceAnyModify></td>
           </tr>
           <tr>
             <th colspan="2">成長</th>

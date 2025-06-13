@@ -55,6 +55,7 @@ body:not([data-create-type="F"]) .fullscratch-only {
 #personal {
   display: flex;
   gap: .5em;
+  flex-wrap: wrap;
 }
 #personal dl {
   flex: 1;

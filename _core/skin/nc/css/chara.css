@@ -23,6 +23,7 @@ article {
 #personal {
   display: flex;
   gap: .5rem;
+  flex-wrap: wrap;
 }
 #personal dl {
   flex: 1;
