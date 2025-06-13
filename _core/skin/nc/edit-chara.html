@@ -107,7 +107,7 @@
       <tr>
         <th>メインクラス</th>
         <td>
-          <select name="mainClass">
+          <select name="mainClass" oninput="calcEnhance()">
         <option value="">--</option>
         <option value="ステーシー" <TMPL_VAR mainClassSelected1>>ステーシー</option>
         <option value="タナトス" <TMPL_VAR mainClassSelected2>>タナトス</option>
@@ -125,7 +125,7 @@
       <tr>
         <th>サブクラス</th>
         <td>
-          <select name="subClass">
+          <select name="subClass" oninput="calcEnhance()">
         <option value="">--</option>
         <option value="ステーシー" <TMPL_VAR subClassSelected1>>ステーシー</option>
         <option value="タナトス" <TMPL_VAR subClassSelected2>>タナトス</option>
@@ -142,15 +142,15 @@
       </tr>
       <tr>
         <th colspan="2">任意選択ボーナス</th>
-        <td class="radio"><input type="radio" name="enhanceAny" value="arms"<TMPL_IF enhanceAnyArms> checked</TMPL_IF>>+1</td>
-        <td class="radio"><input type="radio" name="enhanceAny" value="mutate"<TMPL_IF enhanceAnyMutate> checked</TMPL_IF>>+1</td>
-        <td class="radio"><input type="radio" name="enhanceAny" value="modify"<TMPL_IF enhanceAnyModify> checked</TMPL_IF>>+1</td>
+        <td class="radio"><input type="radio" name="enhanceAny" value="arms" oninput="calcEnhance()"<TMPL_IF enhanceAnyArms> checked</TMPL_IF>>+1</td>
+        <td class="radio"><input type="radio" name="enhanceAny" value="mutate" oninput="calcEnhance()"<TMPL_IF enhanceAnyMutate> checked</TMPL_IF>>+1</td>
+        <td class="radio"><input type="radio" name="enhanceAny" value="modify" oninput="calcEnhance()"<TMPL_IF enhanceAnyModify> checked</TMPL_IF>>+1</td>
       </tr>
       <tr>
         <th colspan="2">成長</th>
-        <td><input type="number" name="enhanceArmsGrow" value="<TMPL_VAR enhanceArmsGrow>"></td>
-        <td><input type="number" name="enhanceMutateGrow" value="<TMPL_VAR enhanceMutateGrow>"></td>
-        <td><input type="number" name="enhanceModifyGrow" value="<TMPL_VAR enhanceModifyGrow>"></td>
+        <td><input type="number" name="enhanceArmsGrow" value="<TMPL_VAR enhanceArmsGrow>" oninput="calcEnhance()"></td>
+        <td><input type="number" name="enhanceMutateGrow" value="<TMPL_VAR enhanceMutateGrow>" oninput="calcEnhance()"></td>
+        <td><input type="number" name="enhanceModifyGrow" value="<TMPL_VAR enhanceModifyGrow>" oninput="calcEnhance()"></td>
       </tr>
       <tr>
         <th colspan="2">合計</th>
