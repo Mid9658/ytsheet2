@@ -18,12 +18,12 @@ function calcEnhance(){
   if(mainB){ main=mainB; arms+=mainB.arms; mutate+=mainB.mutate; modify+=mainB.modify; }
   const subB  = classBonus[form.subClass.value];
   if(subB){ sub=subB; arms+=subB.arms; mutate+=subB.mutate; modify+=subB.modify; }
-  document.getElementById('main-class-arms').textContent   = main.arms   ?? '';
-  document.getElementById('main-class-mutate').textContent = main.mutate ?? '';
-  document.getElementById('main-class-modify').textContent = main.modify ?? '';
-  document.getElementById('sub-class-arms').textContent    = sub.arms    ?? '';
-  document.getElementById('sub-class-mutate').textContent  = sub.mutate  ?? '';
-  document.getElementById('sub-class-modify').textContent  = sub.modify  ?? '';
+  document.getElementById('main-class-arms').textContent   = (main.arms   !== undefined ? main.arms   : '');
+  document.getElementById('main-class-mutate').textContent = (main.mutate !== undefined ? main.mutate : '');
+  document.getElementById('main-class-modify').textContent = (main.modify !== undefined ? main.modify : '');
+  document.getElementById('sub-class-arms').textContent    = (sub.arms    !== undefined ? sub.arms    : '');
+  document.getElementById('sub-class-mutate').textContent  = (sub.mutate  !== undefined ? sub.mutate  : '');
+  document.getElementById('sub-class-modify').textContent  = (sub.modify  !== undefined ? sub.modify  : '');
   const any = form.enhanceAny.value;
   if(any==='arms'){ arms++; }
   else if(any==='mutate'){ mutate++; }
@@ -42,16 +42,8 @@ function calcEnhance(){
   document.getElementById('enhance-mutate-total').textContent = mutate + mutateGrow;
   document.getElementById('enhance-modify-total').textContent = modify + modifyGrow;
 }
-window.addEventListener('DOMContentLoaded',()=>{
+window.onload = function() {
   calcEnhance();
-  form.mainClass.addEventListener('change',calcEnhance);
-  form.subClass.addEventListener('change',calcEnhance);
-  document.querySelectorAll('input[name="enhanceAny"]').forEach(r=>{
-    r.addEventListener('change',calcEnhance);
-  });
-  ['enhanceArmsGrow','enhanceMutateGrow','enhanceModifyGrow'].forEach(name=>{
-    form[name].addEventListener('input',calcEnhance);
-  });
   imagePosition();
   setSortable('maneuver','#maneuver-table tbody','tr');
   if(!document.querySelector('#maneuver-list tr')){
@@ -63,7 +55,7 @@ window.addEventListener('DOMContentLoaded',()=>{
     const num = Number(form.memoryNum.value) || 0;
     for(let i=0; i<num; i++){ addMemory(); }
   }
-});
+};
 
 // マニューバ欄 ----------------------------------------
 function addManeuver(){
