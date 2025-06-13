@@ -53,12 +53,12 @@ body:not([data-create-type="F"]) .fullscratch-only {
 #syndrome-status { grid-area: SYN; }
 
 #personal {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: .5em;
-  flex-wrap: wrap;
 }
 #personal dl {
-  flex: 1;
+  margin: 0;
 }
 
 
