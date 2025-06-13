@@ -118,9 +118,9 @@
         <option value="サイケデリック" <TMPL_VAR mainClassSelected7>>サイケデリック</option>
       </select>
         </td>
-        <td id="main-class-arms"></td>
-        <td id="main-class-mutate"></td>
-        <td id="main-class-modify"></td>
+        <td id="main-class-arms"><TMPL_VAR mainClassArms></td>
+        <td id="main-class-mutate"><TMPL_VAR mainClassMutate></td>
+        <td id="main-class-modify"><TMPL_VAR mainClassModify></td>
       </tr>
       <tr>
         <th>サブクラス</th>
@@ -136,9 +136,9 @@
         <option value="サイケデリック" <TMPL_VAR subClassSelected7>>サイケデリック</option>
       </select>
         </td>
-        <td id="sub-class-arms"></td>
-        <td id="sub-class-mutate"></td>
-        <td id="sub-class-modify"></td>
+        <td id="sub-class-arms"><TMPL_VAR subClassArms></td>
+        <td id="sub-class-mutate"><TMPL_VAR subClassMutate></td>
+        <td id="sub-class-modify"><TMPL_VAR subClassModify></td>
       </tr>
       <tr>
         <th colspan="2">任意選択ボーナス</th>
@@ -154,15 +154,15 @@
       </tr>
       <tr>
         <th colspan="2">合計</th>
-        <td id="enhance-arms-total"></td>
-        <td id="enhance-mutate-total"></td>
-        <td id="enhance-modify-total"></td>
+        <td id="enhance-arms-total"><TMPL_VAR enhanceArmsTotal></td>
+        <td id="enhance-mutate-total"><TMPL_VAR enhanceMutateTotal></td>
+        <td id="enhance-modify-total"><TMPL_VAR enhanceModifyTotal></td>
       </tr>
     </tbody>
   </table>
-  <input type="hidden" name="enhanceArms" id="enhance-arms-base">
-  <input type="hidden" name="enhanceMutate" id="enhance-mutate-base">
-  <input type="hidden" name="enhanceModify" id="enhance-modify-base">
+  <input type="hidden" name="enhanceArms" id="enhance-arms-base" value="<TMPL_VAR enhanceArms>">
+  <input type="hidden" name="enhanceMutate" id="enhance-mutate-base" value="<TMPL_VAR enhanceMutate>">
+  <input type="hidden" name="enhanceModify" id="enhance-modify-base" value="<TMPL_VAR enhanceModify>">
   <dl>
     <dt>行動値<dd><input type="number" name="actionPoint" value="<TMPL_VAR actionPoint>">
     <dt>狂気点<dd><input type="number" name="madnessPoint" value="<TMPL_VAR madnessPoint>">

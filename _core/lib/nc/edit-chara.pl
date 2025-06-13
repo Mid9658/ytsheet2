@@ -51,6 +51,46 @@ my %any_checked = (
   modify => ($pc{enhanceAny} eq 'modify' ? 'checked' : ''),
 );
 
+my %class_bonus = (
+  'ステーシー'     => { arms => 1, mutate => 1, modify => 0 },
+  'タナトス'      => { arms => 1, mutate => 0, modify => 1 },
+  'ゴシック'      => { arms => 0, mutate => 1, modify => 1 },
+  'レクイエム'    => { arms => 2, mutate => 0, modify => 0 },
+  'バロック'      => { arms => 0, mutate => 2, modify => 0 },
+  'ロマネスク'    => { arms => 0, mutate => 0, modify => 2 },
+  'サイケデリック'=> { arms => 0, mutate => 0, modify => 1 },
+);
+
+my ($arms, $mutate, $modify) = (0,0,0);
+my %main_bonus; my %sub_bonus;
+if(my $b = $class_bonus{$pc{mainClass}}){
+  %main_bonus = %{$b};
+  $arms   += $b->{arms};
+  $mutate += $b->{mutate};
+  $modify += $b->{modify};
+}
+if(my $b = $class_bonus{$pc{subClass}}){
+  %sub_bonus = %{$b};
+  $arms   += $b->{arms};
+  $mutate += $b->{mutate};
+  $modify += $b->{modify};
+}
+$pc{mainClassArms}   = $main_bonus{arms}   || 0;
+$pc{mainClassMutate} = $main_bonus{mutate} || 0;
+$pc{mainClassModify} = $main_bonus{modify} || 0;
+$pc{subClassArms}    = $sub_bonus{arms}    || 0;
+$pc{subClassMutate}  = $sub_bonus{mutate}  || 0;
+$pc{subClassModify}  = $sub_bonus{modify}  || 0;
+if   ($pc{enhanceAny} eq 'arms'  ){ $arms++;   }
+elsif($pc{enhanceAny} eq 'mutate'){ $mutate++; }
+elsif($pc{enhanceAny} eq 'modify'){ $modify++; }
+$pc{enhanceArms}   = $arms;
+$pc{enhanceMutate} = $mutate;
+$pc{enhanceModify} = $modify;
+$pc{enhanceArmsTotal}   = $arms   + $pc{enhanceArmsGrow};
+$pc{enhanceMutateTotal} = $mutate + $pc{enhanceMutateGrow};
+$pc{enhanceModifyTotal} = $modify + $pc{enhanceModifyGrow};
+
 my @groups;
 foreach (@set::groups){
   my ($id, undef, $name, undef, $exclusive) = @$_;
@@ -141,6 +181,15 @@ $tmpl->param(
   enhanceArms  => $pc{enhanceArms},
   enhanceMutate=> $pc{enhanceMutate},
   enhanceModify=> $pc{enhanceModify},
+  mainClassArms     => $pc{mainClassArms},
+  mainClassMutate   => $pc{mainClassMutate},
+  mainClassModify   => $pc{mainClassModify},
+  subClassArms      => $pc{subClassArms},
+  subClassMutate    => $pc{subClassMutate},
+  subClassModify    => $pc{subClassModify},
+  enhanceArmsTotal   => $pc{enhanceArmsTotal},
+  enhanceMutateTotal => $pc{enhanceMutateTotal},
+  enhanceModifyTotal => $pc{enhanceModifyTotal},
   enhanceArmsGrow   => $pc{enhanceArmsGrow},
   enhanceMutateGrow => $pc{enhanceMutateGrow},
   enhanceModifyGrow => $pc{enhanceModifyGrow},
