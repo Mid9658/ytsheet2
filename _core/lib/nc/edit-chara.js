@@ -42,7 +42,7 @@ function calcEnhance(){
   document.getElementById('enhance-mutate-total').textContent = mutate + mutateGrow;
   document.getElementById('enhance-modify-total').textContent = modify + modifyGrow;
 }
-window.addEventListener('DOMContentLoaded',()=>{
+window.onload = function() {
   calcEnhance();
   ['change','input'].forEach(ev => {
     form.mainClass.addEventListener(ev,calcEnhance);
@@ -54,7 +54,7 @@ window.addEventListener('DOMContentLoaded',()=>{
   ['enhanceArmsGrow','enhanceMutateGrow','enhanceModifyGrow'].forEach(name=>{
     form[name].addEventListener('input',calcEnhance);
   });
-  imagePosition();
+  imagePosition(1);
   setSortable('maneuver','#maneuver-table tbody','tr');
   if(!document.querySelector('#maneuver-list tr')){
     const num = Number(form.maneuverNum.value) || 0;
@@ -65,7 +65,7 @@ window.addEventListener('DOMContentLoaded',()=>{
     const num = Number(form.memoryNum.value) || 0;
     for(let i=0; i<num; i++){ addMemory(); }
   }
-});
+};
 
 // マニューバ欄 ----------------------------------------
 function addManeuver(){
