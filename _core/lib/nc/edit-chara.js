@@ -56,7 +56,6 @@ window.onload = function() {
   });
   if(typeof imagePosition === 'function'){ imagePosition(1); }
   if(typeof setSortable === 'function'){
-    setSortable('maneuver','#maneuver-table tbody','tr');
     setSortable('memory','#memory-table tbody','tr');
   }
   if(!document.querySelector('#maneuver-list tr')){
@@ -76,6 +75,53 @@ function addManeuver(){
 function delManeuver(){
   delRow('maneuverNum', '#maneuver-list tr:last-of-type');
 }
+
+// ソート
+(() => {
+  let sortable = Sortable.create(document.getElementById('maneuver-list'), {
+    group: "maneuver",
+    dataIdAttr: 'id',
+    animation: 150,
+    handle: '.handle',
+    filter: 'thead,tfoot,template',
+    onSort: () => { maneuverSortAfter(); },
+    onStart: () => {
+      document.querySelectorAll('.trash-box').forEach(obj => { obj.style.display = 'none' });
+      document.getElementById('maneuver-trash').style.display = 'block';
+    },
+    onEnd: () => {
+      if(!maneuverTrashNum){ document.getElementById('maneuver-trash').style.display = 'none'; }
+    },
+  });
+
+  let trashtable = Sortable.create(document.getElementById('maneuver-trash-table'), {
+    group: "maneuver",
+    dataIdAttr: 'id',
+    animation: 150,
+    filter: 'thead,tfoot,template',
+  });
+
+  let maneuverTrashNum = 0;
+  function maneuverSortAfter(){
+    let num = 1;
+    for(let id of sortable.toArray()){
+      const row = document.querySelector(`tr#${id}`);
+      if(!row) continue;
+      replaceSortedNames(row,num,/^(maneuver)(?:Trash)?[0-9]+(.+)$/);
+      num++;
+    }
+    form.maneuverNum.value = num-1;
+    let del = 0;
+    for(let id of trashtable.toArray()){
+      const row = document.querySelector(`tr#${id}`);
+      if(!row) continue;
+      del++;
+      replaceSortedNames(row,'Trash'+del,/^(maneuver)(?:Trash)?[0-9]+(.+)$/);
+    }
+    maneuverTrashNum = del;
+    if(!del){ document.getElementById('maneuver-trash').style.display = 'none'; }
+  }
+})();
 
 // 記憶のカケラ欄 ----------------------------------------
 function addMemory(){
