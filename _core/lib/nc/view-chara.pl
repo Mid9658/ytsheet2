@@ -31,18 +31,16 @@ my $tmpl = HTML::Template->new(
   global_vars       => 1,
 );
 
-$pc{maneuverNum} ||= 3;
-my @maneuvers;
-foreach my $i (1 .. $pc{maneuverNum}){
-  push @maneuvers, {
-    BROKEN => ($pc{"maneuverBroken$i"} ? '☑' : ''),
-    USED   => ($pc{"maneuverUsed$i"}  ? '☑' : ''),
-    PART   => $pc{"maneuverPart$i"},
-    NAME   => $pc{"maneuverName$i"},
-    TIMING => $pc{"maneuverTiming$i"},
-    COST   => $pc{"maneuverCost$i"},
-    RANGE  => $pc{"maneuverRange$i"},
-    NOTE   => $pc{"maneuverNote$i"},
+$pc{effectNum} ||= 0;
+my @effects;
+foreach my $i (1 .. $pc{effectNum}){
+  push @effects, {
+    PART   => $pc{"effectPart$i"},
+    NAME   => $pc{"effectName$i"},
+    TIMING => $pc{"effectTiming$i"},
+    COST   => $pc{"effectCost$i"},
+    RANGE  => $pc{"effectRange$i"},
+    NOTE   => $pc{"effectNote$i"},
   };
 }
 
@@ -88,7 +86,7 @@ $tmpl->param(
   %pc,
   groupName   => $group_name,
   Tags        => \@tags,
-  Maneuvers   => \@maneuvers,
+  Effects     => \@effects,
   MemoryRows  => \@memory_rows,
   FetterRows  => \@fetter_rows,
   enhanceAnyArms   => $enhance_any_mark{arms},

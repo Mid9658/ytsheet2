@@ -33,15 +33,48 @@ article {
   margin: 0;
 }
 
-#maneuvers table,
+
+#effect table,
 #enhancement table {
   width: 100%;
   border-collapse: collapse;
 }
 
-#maneuvers th, #maneuvers td {
+#effect table th,
+#effect table td {
   border: 1px solid #aaa;
   padding: .2rem .4rem;
+}
+
+#effect table thead th:nth-child(n+4) {
+  font-size: 90%;
+}
+
+#effect table tbody td:nth-child(n+2) {
+  font-family: var(--font-proportional);
+  font-feature-settings: "palt";
+}
+
+#effect table tbody td:nth-child(3) { font-weight: bold; }
+#effect table tbody td:nth-child(4),
+#effect table tbody td:nth-child(5),
+#effect table tbody td:nth-child(6) {
+  font-size: 90%;
+}
+
+#effect table tbody td.note {
+  padding-left: .5rem;
+  display: none;
+}
+
+#effect[data-full-open="true"] table tbody td.note,
+#effect table tbody:hover td.note {
+  display: table-cell;
+}
+
+#effect table tbody td.note span.right {
+  float: right;
+  font-size: 90%;
 }
 
 #free-note {

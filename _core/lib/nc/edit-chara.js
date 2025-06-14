@@ -97,58 +97,59 @@ window.onload = function() {
   }
 };
 
-// マニューバ欄 ----------------------------------------
-function addManeuver(){
-  document.querySelector('#maneuver-table tbody').append(createRow('maneuver','maneuverNum'));
+// エフェクト欄 ----------------------------------------
+function addEffect(){
+  document.querySelector('#effect-table').append(createRow('effect','effectNum'));
 }
-function delManeuver(){
-  delRow('maneuverNum', '#maneuver-list tr:last-of-type');
+function delEffect(){
+  if(delRow('effectNum', '#effect-table tbody:last-of-type')){
+    // 追加の計算処理があればここに
+  }
 }
 
-// ソート
 (() => {
-  let sortable = Sortable.create(document.getElementById('maneuver-list'), {
-    group: "maneuver",
+  let sortable = Sortable.create(document.getElementById('effect-table'), {
+    group: 'effect',
     dataIdAttr: 'id',
     animation: 150,
     handle: '.handle',
     filter: 'thead,tfoot,template',
-    onSort: () => { maneuverSortAfter(); },
+    onSort: () => { effectSortAfter(); },
     onStart: () => {
       document.querySelectorAll('.trash-box').forEach(obj => { obj.style.display = 'none' });
-      document.getElementById('maneuver-trash').style.display = 'block';
+      document.getElementById('effect-trash').style.display = 'block';
     },
     onEnd: () => {
-      if(!maneuverTrashNum){ document.getElementById('maneuver-trash').style.display = 'none'; }
+      if(!effectTrashNum){ document.getElementById('effect-trash').style.display = 'none'; }
     },
   });
 
-  let trashtable = Sortable.create(document.getElementById('maneuver-trash-table'), {
-    group: "maneuver",
+  let trashtable = Sortable.create(document.getElementById('effect-trash-table'), {
+    group: 'effect',
     dataIdAttr: 'id',
     animation: 150,
     filter: 'thead,tfoot,template',
   });
 
-  let maneuverTrashNum = 0;
-  function maneuverSortAfter(){
+  let effectTrashNum = 0;
+  function effectSortAfter(){
     let num = 1;
     for(let id of sortable.toArray()){
-      const row = document.querySelector(`tr#${id}`);
+      const row = document.querySelector(`tbody#${id}`);
       if(!row) continue;
-      replaceSortedNames(row,num,/^(maneuver)(?:Trash)?[0-9]+(.+)$/);
+      replaceSortedNames(row,num,/^(effect(?:Trash)?[A-Za-z]*)(?:\d+)([A-Za-z]*)$/);
       num++;
     }
-    form.maneuverNum.value = num-1;
+    form.effectNum.value = num-1;
     let del = 0;
     for(let id of trashtable.toArray()){
-      const row = document.querySelector(`tr#${id}`);
+      const row = document.querySelector(`tbody#${id}`);
       if(!row) continue;
       del++;
-      replaceSortedNames(row,'Trash'+del,/^(maneuver)(?:Trash)?[0-9]+(.+)$/);
+      replaceSortedNames(row,'Trash'+del,/^(effect(?:Trash)?[A-Za-z]*)(?:\d+)([A-Za-z]*)$/);
     }
-    maneuverTrashNum = del;
-    if(!del){ document.getElementById('maneuver-trash').style.display = 'none'; }
+    effectTrashNum = del;
+    if(!del){ document.getElementById('effect-trash').style.display = 'none'; }
   }
 })();
 
