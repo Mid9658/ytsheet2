@@ -131,13 +131,14 @@
     <h2>未練／狂気</h2>
     <table>
       <thead>
-        <tr><th>対象<th>未練<th>狂気点<th>発狂効果<th>発狂内容</tr>
+        <tr><th>対象<th><th>未練<th>狂気点<th>発狂効果<th>発狂内容</tr>
       </thead>
       <tbody>
 <TMPL_LOOP FetterRows>
         <tr>
           <td><TMPL_VAR TARGET></td>
-          <td><span class="fetter-to">への</span><TMPL_VAR NOTE></td>
+          <td>への</td>
+          <td><TMPL_VAR NOTE></td>
           <td><TMPL_VAR POINT_MARK></td>
           <td><TMPL_VAR EFFECT></td>
           <td><TMPL_VAR EFFECT_NOTE></td>
