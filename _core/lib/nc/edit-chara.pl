@@ -129,14 +129,14 @@ foreach my $i (1 .. $pc{maneuverNum}){
   $maneuver_rows_html .= <<"HTML";
       <tr id="maneuver-row${i}">
         <td class="handle"></td>
-        <td>@{[ input "maneuver${i}Broken", 'checkbox' ]}</td>
-        <td>@{[ input "maneuver${i}Used",   'checkbox' ]}</td>
+        <td>@{[ input "maneuverBroken${i}", 'checkbox' ]}</td>
+        <td>@{[ input "maneuverUsed${i}",   'checkbox' ]}</td>
         <td><select name="maneuverPart${i}">@{[ option "maneuverPart${i}",'スキル','頭','腕','胴','脚' ]}</select></td>
-        <td>@{[ input "maneuver${i}Name" ]}</td>
+        <td>@{[ input "maneuverName${i}" ]}</td>
         <td><select name="maneuverTiming${i}">@{[ option "maneuverTiming${i}",'オート','アクション','ラピッド','ジャッジ','ダメージ','効果参照' ]}</select></td>
-        <td>@{[ input "maneuver${i}Cost" ]}</td>
-        <td>@{[ input "maneuver${i}Range" ]}</td>
-        <td>@{[ input "maneuver${i}Note" ]}</td>
+        <td>@{[ input "maneuverCost${i}" ]}</td>
+        <td>@{[ input "maneuverRange${i}" ]}</td>
+        <td>@{[ input "maneuverNote${i}" ]}</td>
       </tr>
 HTML
 }
