@@ -41,16 +41,13 @@ body:not([data-create-type="F"]) .fullscratch-only {
 }
 
 #area-status {
-  min-height: 0%;
-  grid-template-columns: 0.6fr 1.2fr 0.9fr 1.8fr;
-  grid-template-rows: auto auto 1fr;
-  grid-template-areas:
-    "PER PER WKS IMG"
-    "SYN SYN SYN IMG"
-    "STT STT STT IMG"
-  ;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: .5em;
+  grid-template-areas: "LEFT RIGHT";
 }
-#syndrome-status { grid-area: SYN; }
+#status-left  { grid-area: LEFT; }
+#status-right { grid-area: RIGHT; }
 
 #personal {
   display: grid;
@@ -62,18 +59,12 @@ body:not([data-create-type="F"]) .fullscratch-only {
 }
 
 
-@media screen and (width <= 735px){
+@media screen and (max-width: 735px){
   #area-status {
-    grid-template-columns: 1fr 1fr 2fr;
-    grid-gap: var(--box-v-gap) var(--box-h-gap);
-    grid-template-rows: auto auto auto 1fr;
-
+    grid-template-columns: 1fr;
     grid-template-areas:
-      "IMG  IMG  IMG"
-      "PER  PER  WKS"
-      "SYN  SYN  SYN "
-      "STT  STT  STT "
-    ;
+      "RIGHT"
+      "LEFT";
   }
 }
 

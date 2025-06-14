@@ -187,6 +187,8 @@ $tmpl->param(
   playerName   => $pc{playerName},
   age          => $pc{age},
   gender       => $pc{gender},
+  height       => $pc{height},
+  weight       => $pc{weight},
   mainClass    => $pc{mainClass},
   subClass     => $pc{subClass},
   enhanceAny   => $pc{enhanceAny},

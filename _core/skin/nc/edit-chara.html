@@ -79,15 +79,17 @@
 <article>
 <section id="area-status" class="box">
   <h2>ステータス</h2>
-  <TMPL_VAR imageForm>
-  <div id="personal" class="box-union">
-    <dl class="box" id="age"><dt>年齢<dd><input type="text" name="age" value="<TMPL_VAR age>"></dl>
-    <dl class="box" id="gender"><dt>性別<dd><input type="text" name="gender" value="<TMPL_VAR gender>"></dl>
-  </div>
-  <table id="class-enhance" class="edit-table">
-    <thead>
-      <tr><th colspan="5">ポジション・クラス／強化値</th></tr>
-    </thead>
+  <div id="status-left">
+    <div id="personal" class="box-union">
+      <dl class="box" id="age"><dt>年齢<dd><input type="text" name="age" value="<TMPL_VAR age>"></dl>
+      <dl class="box" id="gender"><dt>性別<dd><input type="text" name="gender" value="<TMPL_VAR gender>"></dl>
+      <dl class="box" id="height"><dt>身長<dd><input type="text" name="height" value="<TMPL_VAR height>"></dl>
+      <dl class="box" id="weight"><dt>体重<dd><input type="text" name="weight" value="<TMPL_VAR weight>"></dl>
+    </div>
+    <table id="class-enhance" class="edit-table">
+      <thead>
+        <tr><th colspan="5">ポジション・クラス／強化値</th></tr>
+      </thead>
     <tbody>
       <tr>
         <th>ポジション</th>
@@ -159,13 +161,17 @@
         <td id="enhance-modify-total"><TMPL_VAR enhanceModifyTotal></td>
       </tr>
     </tbody>
-  </table>
-  <input type="hidden" name="enhanceArms" id="enhance-arms-base" value="<TMPL_VAR enhanceArms>">
-  <input type="hidden" name="enhanceMutate" id="enhance-mutate-base" value="<TMPL_VAR enhanceMutate>">
-  <input type="hidden" name="enhanceModify" id="enhance-modify-base" value="<TMPL_VAR enhanceModify>">
-  <dl>
-    <dt>行動値<dd><input type="number" name="actionPoint" value="<TMPL_VAR actionPoint>">
-  </dl>
+    </table>
+    <input type="hidden" name="enhanceArms" id="enhance-arms-base" value="<TMPL_VAR enhanceArms>">
+    <input type="hidden" name="enhanceMutate" id="enhance-mutate-base" value="<TMPL_VAR enhanceMutate>">
+    <input type="hidden" name="enhanceModify" id="enhance-modify-base" value="<TMPL_VAR enhanceModify>">
+    <dl>
+      <dt>行動値<dd><input type="number" name="actionPoint" value="<TMPL_VAR actionPoint>">
+    </dl>
+  </div>
+  <div id="status-right">
+    <TMPL_VAR imageForm>
+  </div>
 </section>
 <section id="maneuvers" class="box">
   <h2>マニューバ</h2>
