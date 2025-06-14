@@ -292,6 +292,19 @@
 </main>
 <script src="<TMPL_VAR coreDir>/lib/edit.js?<TMPL_VAR ver>" defer></script>
 <script src="<TMPL_VAR coreDir>/lib/nc/edit-chara.js?<TMPL_VAR ver>" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  if(document.sheet){
+    if(document.sheet.mainClass) document.sheet.mainClass.value = '<TMPL_VAR mainClass>';
+    if(document.sheet.subClass)  document.sheet.subClass.value  = '<TMPL_VAR subClass>';
+    const any = '<TMPL_VAR enhanceAny>';
+    if(any){
+      const r = document.querySelector('input[name="enhanceAny"][value="'+any+'"]');
+      if(r){ r.checked = true; }
+    }
+  }
+});
+</script>
 <footer>
   <p class="notes">©Incog.Lab「永い後日談のネクロニカ」</p>
   <p class="copyright">©<a href="https://yutorize.2-d.jp">ゆとらいず工房</a>「ゆとシートⅡ」ver.<TMPL_VAR ver></p>
