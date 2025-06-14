@@ -24,12 +24,14 @@ sub data_calc {
       $pc{"fetterTarget1"} ||= 'たからもの';
       $pc{"fetterNote1"}   ||= '依存';
       $pc{"fetterEffect1"} ||= '幼児退行';
+      $pc{"fetterEffectNote1"} ||= '最大行動値-2';
       $pc{"fetterPoint1"}  ||= 3;
     }
     else {
       $pc{"fetterTarget$i"} ||= '';
       $pc{"fetterNote$i"}   ||= '';
       $pc{"fetterEffect$i"} ||= '';
+      $pc{"fetterEffectNote$i"} ||= '';
       $pc{"fetterPoint$i"}  ||= '';
     }
   }

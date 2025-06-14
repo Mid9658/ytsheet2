@@ -60,6 +60,7 @@ foreach my $i (1 .. 6){
     TARGET    => $pc{"fetterTarget$i"},
     NOTE      => $pc{"fetterNote$i"},
     EFFECT    => $pc{"fetterEffect$i"},
+    EFFECT_NOTE=> $pc{"fetterEffectNote$i"},
     POINT     => $p,
     POINT_MARK=> $mark,
   };

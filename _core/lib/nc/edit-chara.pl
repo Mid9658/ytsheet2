@@ -157,6 +157,7 @@ foreach my $i (1 .. 6){
     TARGET => pcEscape(pcUnescape($pc{"fetterTarget$i"})),
     NOTE   => pcEscape(pcUnescape($pc{"fetterNote$i"})),
     EFFECT => pcEscape(pcUnescape($pc{"fetterEffect$i"})),
+    EFFECT_NOTE => pcEscape(pcUnescape($pc{"fetterEffectNote$i"})),
     POINT  => pcEscape(pcUnescape($pc{"fetterPoint$i"})),
   };
 }
