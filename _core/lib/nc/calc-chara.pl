@@ -74,6 +74,13 @@ sub data_calc {
   $pc{enhanceMutateTotal} = $mutate + $pc{enhanceMutateGrow};
   $pc{enhanceModifyTotal} = $modify + $pc{enhanceModifyGrow};
 
+  $pc{freeNote} =~ s/\r\n?|\n/<br>/g;
+
+  if(!$::mode_save){ return %pc; }
+
+  $pc{$_} = pcEscape($pc{$_}) foreach (keys %pc);
+  $pc{tags} = normalizeHashtags($pc{tags});
+
   $::newline = "$pc{id}<>$::file<>$pc{birthTime}<>$::now<>$pc{characterName}<>$pc{playerName}<>$pc{group}<>$pc{lastSession}<>$pc{image}<> $pc{tags} <>$pc{hide}<>";
   return %pc;
 }
