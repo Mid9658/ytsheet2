@@ -489,6 +489,10 @@ body:not(.mode-crc) .crc-only {
     white-space: nowrap;
   }
   #effect table tbody td:nth-child(3) input { min-width: 2em; } /* LV */
+  #effect-table td.note input {
+    width: 100%;
+    margin: 0;
+  }
 }
 
 #magic {

@@ -57,8 +57,7 @@ article {
 
 #effect table tbody td:nth-child(3) { font-weight: bold; }
 #effect table tbody td:nth-child(4),
-#effect table tbody td:nth-child(5),
-#effect table tbody td:nth-child(6) {
+#effect table tbody td:nth-child(5) {
   font-size: 90%;
 }
 
