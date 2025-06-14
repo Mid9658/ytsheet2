@@ -28,7 +28,16 @@ $pc{enhanceArmsGrow}   ||= 0;
 $pc{enhanceMutateGrow} ||= 0;
 $pc{enhanceModifyGrow} ||= 0;
 $pc{enhanceAny}       ||= '';
-$pc{maneuverNum}      ||= 3;
+$pc{maneuverNum}      ||= do {
+  my $max = 0;
+  foreach my $key (keys %pc){
+    if($key =~ /^maneuverName(\d+)$/){
+      my $num = $1;
+      $max = $num if $num > $max;
+    }
+  }
+  $max || 3;
+};
 $pc{memoryNum}        ||= 2;
 foreach my $i (1 .. 6){
   $pc{"fetterPoint$i"} ||= ($i == 1 ? 3 : '');
