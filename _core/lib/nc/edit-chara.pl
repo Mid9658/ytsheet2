@@ -36,7 +36,7 @@ $pc{maneuverNum}      ||= do {
       $max = $num if $num > $max;
     }
   }
-  $max || 5;
+  $max || 6;
 };
 $pc{memoryNum}        ||= 2;
 foreach my $i (1 .. 6){
