@@ -118,16 +118,16 @@ foreach my $i (1 .. $pc{maneuverNum}){
     PART_ARM   => ($pc{"maneuverPart$i"} eq '腕' ? 'selected' : ''),
     PART_BODY  => ($pc{"maneuverPart$i"} eq '胴' ? 'selected' : ''),
     PART_LEG   => ($pc{"maneuverPart$i"} eq '脚' ? 'selected' : ''),
-    NAME   => $pc{"maneuverName$i"},
+    NAME   => pcEscape($pc{"maneuverName$i"}),
     TIMING_AUTO   => ($pc{"maneuverTiming$i"} eq 'オート'     ? 'selected' : ''),
     TIMING_ACTION => ($pc{"maneuverTiming$i"} eq 'アクション' ? 'selected' : ''),
     TIMING_RAPID  => ($pc{"maneuverTiming$i"} eq 'ラピッド'   ? 'selected' : ''),
     TIMING_JUDGE  => ($pc{"maneuverTiming$i"} eq 'ジャッジ'   ? 'selected' : ''),
     TIMING_DAMAGE => ($pc{"maneuverTiming$i"} eq 'ダメージ'   ? 'selected' : ''),
     TIMING_REF    => ($pc{"maneuverTiming$i"} eq '効果参照'   ? 'selected' : ''),
-    COST   => $pc{"maneuverCost$i"},
-    RANGE  => $pc{"maneuverRange$i"},
-    NOTE   => $pc{"maneuverNote$i"},
+    COST   => pcEscape($pc{"maneuverCost$i"}),
+    RANGE  => pcEscape($pc{"maneuverRange$i"}),
+    NOTE   => pcEscape($pc{"maneuverNote$i"}),
   };
 }
 
@@ -135,8 +135,8 @@ my @memory_rows;
 foreach my $i (1 .. $pc{memoryNum}){
   push @memory_rows, {
     ID   => $i,
-    NAME => $pc{"memoryName$i"},
-    NOTE => $pc{"memoryNote$i"},
+    NAME => pcEscape($pc{"memoryName$i"}),
+    NOTE => pcEscape($pc{"memoryNote$i"}),
   };
 }
 
@@ -144,10 +144,10 @@ my @fetter_rows;
 foreach my $i (1 .. 6){
   push @fetter_rows, {
     ID     => $i,
-    TARGET => $pc{"fetterTarget$i"},
-    NOTE   => $pc{"fetterNote$i"},
-    EFFECT => $pc{"fetterEffect$i"},
-    POINT  => $pc{"fetterPoint$i"},
+    TARGET => pcEscape($pc{"fetterTarget$i"}),
+    NOTE   => pcEscape($pc{"fetterNote$i"}),
+    EFFECT => pcEscape($pc{"fetterEffect$i"}),
+    POINT  => pcEscape($pc{"fetterPoint$i"}),
   };
 }
 
