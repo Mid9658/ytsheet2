@@ -438,6 +438,14 @@ sub pcEscape {
   $text =~ tr/\r\n//d;
   return $text;
 }
+sub pcUnescape {
+  my $text = shift;
+  $text =~ s/&amp;/&/g;
+  $text =~ s/&quot;/"/g;
+  $text =~ s/&lt;/</g;
+  $text =~ s/&gt;/>/g;
+  return $text;
+}
 sub normalizeHashtags {
   my $text = shift;
   $text =~ s/\s/ /g; #空白統一

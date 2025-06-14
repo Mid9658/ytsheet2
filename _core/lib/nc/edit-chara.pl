@@ -118,16 +118,16 @@ foreach my $i (1 .. $pc{maneuverNum}){
     PART_ARM   => ($pc{"maneuverPart$i"} eq '腕' ? 'selected' : ''),
     PART_BODY  => ($pc{"maneuverPart$i"} eq '胴' ? 'selected' : ''),
     PART_LEG   => ($pc{"maneuverPart$i"} eq '脚' ? 'selected' : ''),
-    NAME   => pcEscape($pc{"maneuverName$i"}),
+    NAME   => pcEscape(pcUnescape($pc{"maneuverName$i"})),
     TIMING_AUTO   => ($pc{"maneuverTiming$i"} eq 'オート'     ? 'selected' : ''),
     TIMING_ACTION => ($pc{"maneuverTiming$i"} eq 'アクション' ? 'selected' : ''),
     TIMING_RAPID  => ($pc{"maneuverTiming$i"} eq 'ラピッド'   ? 'selected' : ''),
     TIMING_JUDGE  => ($pc{"maneuverTiming$i"} eq 'ジャッジ'   ? 'selected' : ''),
     TIMING_DAMAGE => ($pc{"maneuverTiming$i"} eq 'ダメージ'   ? 'selected' : ''),
     TIMING_REF    => ($pc{"maneuverTiming$i"} eq '効果参照'   ? 'selected' : ''),
-    COST   => pcEscape($pc{"maneuverCost$i"}),
-    RANGE  => pcEscape($pc{"maneuverRange$i"}),
-    NOTE   => pcEscape($pc{"maneuverNote$i"}),
+    COST   => pcEscape(pcUnescape($pc{"maneuverCost$i"})),
+    RANGE  => pcEscape(pcUnescape($pc{"maneuverRange$i"})),
+    NOTE   => pcEscape(pcUnescape($pc{"maneuverNote$i"})),
   };
 }
 
@@ -135,8 +135,8 @@ my @memory_rows;
 foreach my $i (1 .. $pc{memoryNum}){
   push @memory_rows, {
     ID   => $i,
-    NAME => pcEscape($pc{"memoryName$i"}),
-    NOTE => pcEscape($pc{"memoryNote$i"}),
+    NAME => pcEscape(pcUnescape($pc{"memoryName$i"})),
+    NOTE => pcEscape(pcUnescape($pc{"memoryNote$i"})),
   };
 }
 
@@ -144,10 +144,10 @@ my @fetter_rows;
 foreach my $i (1 .. 6){
   push @fetter_rows, {
     ID     => $i,
-    TARGET => pcEscape($pc{"fetterTarget$i"}),
-    NOTE   => pcEscape($pc{"fetterNote$i"}),
-    EFFECT => pcEscape($pc{"fetterEffect$i"}),
-    POINT  => pcEscape($pc{"fetterPoint$i"}),
+    TARGET => pcEscape(pcUnescape($pc{"fetterTarget$i"})),
+    NOTE   => pcEscape(pcUnescape($pc{"fetterNote$i"})),
+    EFFECT => pcEscape(pcUnescape($pc{"fetterEffect$i"})),
+    POINT  => pcEscape(pcUnescape($pc{"fetterPoint$i"})),
   };
 }
 
@@ -213,7 +213,7 @@ $tmpl->param(
   memoryNum    => $pc{memoryNum},
   MemoryRows   => \@memory_rows,
   FetterRows   => \@fetter_rows,
-  freeNote     => $pc{freeNote},
+  freeNote     => do { my $t = pcUnescape($pc{freeNote}); $t =~ s/&lt;br&gt;/\n/g; pcEscape($t) },
   forbidden    => $pc{forbidden},
   hide         => $pc{hide},
   group        => $pc{group},
