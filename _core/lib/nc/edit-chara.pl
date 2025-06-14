@@ -31,7 +31,7 @@ $pc{enhanceAny}       ||= '';
 $pc{effectNum}      ||= do {
   my $max = 0;
   foreach my $key (keys %pc){
-    if($key =~ /^effectName(\d+)$/){
+    if($key =~ /^effect(\d+)Name$/){
       my $num = $1;
       $max = $num if $num > $max;
     }
@@ -129,24 +129,24 @@ my $menu_html = qq{<li class="small"><a href="./">一覧へ</a>};
 
 my $effect_rows_html = '';
 foreach my $i (1 .. $pc{effectNum}){
-  my $part   = pcEscape(pcUnescape($pc{"effectPart$i"}));
-  my $name   = pcEscape(pcUnescape($pc{"effectName$i"}));
-  my $timing = pcEscape(pcUnescape($pc{"effectTiming$i"}));
-  my $cost   = pcEscape(pcUnescape($pc{"effectCost$i"}));
-  my $range  = pcEscape(pcUnescape($pc{"effectRange$i"}));
-  my $note   = pcEscape(pcUnescape($pc{"effectNote$i"}));
+  my $part   = pcEscape(pcUnescape($pc{"effect${i}Part"}));
+  my $name   = pcEscape(pcUnescape($pc{"effect${i}Name"}));
+  my $timing = pcEscape(pcUnescape($pc{"effect${i}Timing"}));
+  my $cost   = pcEscape(pcUnescape($pc{"effect${i}Cost"}));
+  my $range  = pcEscape(pcUnescape($pc{"effect${i}Range"}));
+  my $note   = pcEscape(pcUnescape($pc{"effect${i}Note"}));
   $effect_rows_html .= qq{
     <tbody id="effect-row$i">
       <tr>
         <td rowspan="2" class="handle"></td>
-        <td><input type="text" name="effectPart$i" value="$part" placeholder="部位" list="list-part"></td>
-        <td><input type="text" name="effectName$i" value="$name" placeholder="名称"></td>
-        <td><input type="text" name="effectTiming$i" value="$timing" placeholder="タイミング" list="list-timing"></td>
-        <td><input type="text" name="effectCost$i" value="$cost" placeholder="コスト" list="list-cost"></td>
-        <td><input type="text" name="effectRange$i" value="$range" placeholder="射程" list="list-range"></td>
+        <td><input type="text" name="effect${i}Part" value="$part" placeholder="部位" list="list-part"></td>
+        <td><input type="text" name="effect${i}Name" value="$name" placeholder="名称"></td>
+        <td><input type="text" name="effect${i}Timing" value="$timing" placeholder="タイミング" list="list-timing"></td>
+        <td><input type="text" name="effect${i}Cost" value="$cost" placeholder="コスト" list="list-cost"></td>
+        <td><input type="text" name="effect${i}Range" value="$range" placeholder="射程" list="list-range"></td>
       </tr>
       <tr>
-        <td class="note" colspan="5"><input type="text" name="effectNote$i" value="$note" placeholder="効果"></td>
+        <td class="note" colspan="5"><input type="text" name="effect${i}Note" value="$note" placeholder="効果"></td>
       </tr>
     </tbody>
   };
