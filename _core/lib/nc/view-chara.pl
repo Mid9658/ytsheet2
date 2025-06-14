@@ -35,12 +35,12 @@ $pc{effectNum} ||= 0;
 my @effects;
 foreach my $i (1 .. $pc{effectNum}){
   push @effects, {
-    PART   => $pc{"effectPart$i"},
-    NAME   => $pc{"effectName$i"},
-    TIMING => $pc{"effectTiming$i"},
-    COST   => $pc{"effectCost$i"},
-    RANGE  => $pc{"effectRange$i"},
-    NOTE   => $pc{"effectNote$i"},
+    PART   => $pc{"effect${i}Part"},
+    NAME   => $pc{"effect${i}Name"},
+    TIMING => $pc{"effect${i}Timing"},
+    COST   => $pc{"effect${i}Cost"},
+    RANGE  => $pc{"effect${i}Range"},
+    NOTE   => $pc{"effect${i}Note"},
   };
 }
 

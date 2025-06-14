@@ -21,12 +21,12 @@ sub data_calc {
   }
 
   foreach my $i (1 .. $pc{effectNum}){
-    $pc{"effectPart$i"}   ||= '';
-    $pc{"effectName$i"}   ||= '';
-    $pc{"effectTiming$i"} ||= '';
-    $pc{"effectCost$i"}   ||= '';
-    $pc{"effectRange$i"}  ||= '';
-    $pc{"effectNote$i"}   ||= '';
+    $pc{"effect${i}Part"}   ||= '';
+    $pc{"effect${i}Name"}   ||= '';
+    $pc{"effect${i}Timing"} ||= '';
+    $pc{"effect${i}Cost"}   ||= '';
+    $pc{"effect${i}Range"}  ||= '';
+    $pc{"effect${i}Note"}   ||= '';
   }
 
   ### 未練／狂気
