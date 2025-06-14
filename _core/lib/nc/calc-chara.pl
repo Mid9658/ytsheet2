@@ -85,6 +85,9 @@ sub data_calc {
   $pc{enhanceModifyTotal} = $modify + $pc{enhanceModifyGrow};
 
   $pc{freeNote} =~ s/\r\n?|\n/<br>/g;
+  foreach my $i (1 .. 6){
+    $pc{"fetterEffectNote$i"} =~ s/\r\n?|\n/<br>/g;
+  }
 
   if(!$::mode_save){ return %pc; }
 

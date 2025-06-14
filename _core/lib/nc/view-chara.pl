@@ -8,6 +8,10 @@ my $LOGIN_ID = $::LOGIN_ID;
 
 our %pc = getSheetData();
 
+foreach my $i (1 .. 6){
+  $pc{"fetterEffectNote$i"} = unescapeTags($pc{"fetterEffectNote$i"});
+}
+
 # 任意選択ボーナスの表示用
 my %enhance_any_mark = (
   arms   => ($pc{enhanceAny} eq 'arms'   ? '+1' : ''),
