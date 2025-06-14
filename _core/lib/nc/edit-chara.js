@@ -10,6 +10,39 @@ const classBonus = {
   'ロマネスク':    {arms:0, mutate:0, modify:2},
   'サイケデリック':{arms:0, mutate:0, modify:1}
 };
+
+const fetterData = {
+  '【嫌悪】':    {effect:'敵対認識', text:'失敗した攻撃は全て（射程内にいるなら）\n嫌悪の対象に命中。箇所は被害側任意決定'},
+  '【独占】':    {effect:'独占衝動', text:'戦闘開始と戦闘終了時に１つずつ、\n対象はパーツを１つ選んで損傷する。'},
+  '【依存】':    {effect:'幼児退行', text:'最大行動値-2'},
+  '【執着】':    {effect:'追尾監視', text:'戦闘開始と戦闘終了時に１点ずつ、\n対象はあなたへの未練に狂気点を加える。'},
+  '【恋心】':    {effect:'自傷行動', text:'戦闘開始と戦闘終了時に１つずつ、\nあなたはパーツ１つを選んで損傷する。'},
+  '【対抗】':    {effect:'過剰競争', text:'戦闘開始と戦闘終了時に１つずつ、あなたは\n任意の未練に狂気点を１点追加で得る。'},
+  '【友情】':    {effect:'共鳴依存', text:'損傷共有：数（カウント＝対象）\nセッション終了時に計算。'},
+  '【保護】':    {effect:'常時密着', text:'阻害：移動以外【別エリア＝対象】\n制限：移動対象【自身＆対象以外】'},
+  '【憧憬】':    {effect:'贋作妄想', text:'阻害：移動以外【同エリア＝対象】\n制限：移動対象【自身＆対象以外】'},
+  '【信頼】':    {effect:'疑心暗鬼', text:'あなた以外の全ての姉妹の最大行動値-1'},
+  '【恐怖】':    {effect:'認識拒否', text:'あらゆる行動判定・狂気判定の出目-1'},
+  '【隷属】':    {effect:'造反有理', text:'戦闘中、あなたが失敗した攻撃判定は\n全て、大失敗として扱う。'},
+  '【不安】':    {effect:'挙動不審', text:'最大行動値-2'},
+  '【燐憫】':    {effect:'過剰移入', text:'「サヴァント」に対する攻撃判定の出目-1'},
+  '【愛憎】':    {effect:'凶愛心中', text:'狂気判定・攻撃判定で大成功する毎に\n[判定値-10]個の自身のパーツを損傷させる'},
+  '【悔恨】':    {effect:'自業自棄', text:'戦闘中、あなたが失敗した攻撃判定は全て、\nあなた自身の任意の個所にダメージを与える'},
+  '【軽蔑】':    {effect:'眼中不在', text:'戦闘中、同エリアの手駒が\nあなたに対して行う攻撃判定の出目+1'},
+  '【憤怒】':    {effect:'激情暴走', text:'行動判定・狂気判定の出目-1'},
+  '【怨念】':    {effect:'不倶戴天', text:'戦闘中、あなたは、逃走判定ができない。\nまた、あなたが「自身と未練の対象」以外を対象にしたマニューバを使用する際、\n行動値１点を追加で減らさなくてはいけない。'},
+  '【憎悪】':    {effect:'痕跡破壊', text:'【タイミング：この未練が発狂した際】\nあなた以外の姉妹１人は任意P２つを損傷'},
+  '【忌避】_中立':{effect:'隔絶意識', text:'阻害：移動以外【同エリア＝対象＆サヴァント】\n制限：移動対象【自身＆対象＆サヴァント以外】'},
+  '【嫉妬】_中立':{effect:'不協和音', text:'全ての姉妹は行動判定に修正-1'},
+  '【依存】_中立':{effect:'幼児退行', text:'最大行動値-2'},
+  '【燐憫】_中立':{effect:'過剰移入', text:'「サヴァント」に対する攻撃判定の出目-1'},
+  '【感謝】_中立':{effect:'病的返礼', text:'この未練が発狂した際、任意の基本P２つ\n（なければ最もLvの低い強化P１つ）を損傷'},
+  '【悔恨】_中立':{effect:'自業自棄', text:'戦闘中、あなたが失敗した攻撃判定は全て、\nあなた自身の任意の個所にダメージを与える'},
+  '【期待】_中立':{effect:'希望転結', text:'あなたは狂気点を追加して振り直しを行う際、\n出目-1（この効果は累積する）。'},
+  '【保護】_中立':{effect:'生前回帰', text:'あなたは「レギオン」を\nマニューバの対象に選べない。'},
+  '【尊敬】_中立':{effect:'神化崇拝', text:'あなたは「他の姉妹」を\nマニューバの対象に選べない。'},
+  '【信頼】_中立':{effect:'疑心暗鬼', text:'あなた以外の全ての姉妹の最大行動値-1'}
+};
 function calcEnhance(){
   let arms=0, mutate=0, modify=0;
   let main={arms:0,mutate:0,modify:0};
@@ -126,3 +159,36 @@ function addMemory(){
 function delMemory(){
   delRow('memoryNum', '#memory-list tr:last-of-type',2);
 }
+
+// 未練欄 ----------------------------------------
+function setFetter(num){
+  const note = form['fetterNote'+num].value;
+  const data = fetterData[note];
+  if(data){
+    form['fetterEffect'+num].value = data.effect;
+    form['fetterEffectNote'+num].value = data.text;
+  }
+  else {
+    form['fetterEffect'+num].value = '';
+    form['fetterEffectNote'+num].value = '';
+  }
+}
+
+window.addEventListener('load', () => {
+  for(let i=1;i<=6;i++){
+    const select = form['fetterNote'+i];
+    if(!select) continue;
+    const blank = document.createElement('option');
+    blank.value = '';
+    blank.textContent = '――';
+    select.appendChild(blank);
+    Object.keys(fetterData).forEach(name => {
+      const op = document.createElement('option');
+      op.value = name;
+      op.textContent = name;
+      select.appendChild(op);
+    });
+    select.value = select.dataset.value || '';
+    setFetter(i);
+  }
+});
