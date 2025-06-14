@@ -128,20 +128,11 @@ my @effect_rows;
 foreach my $i (1 .. $pc{effectNum}){
   push @effect_rows, {
     ID       => $i,
+    PART     => pcEscape(pcUnescape($pc{"effectPart$i"})),
     NAME     => pcEscape(pcUnescape($pc{"effectName$i"})),
-    LV       => $pc{"effectLv$i"},
     TIMING   => pcEscape(pcUnescape($pc{"effectTiming$i"})),
-    SKILL    => pcEscape(pcUnescape($pc{"effectSkill$i"})),
-    DFCLTY   => pcEscape(pcUnescape($pc{"effectDfclty$i"})),
-    TARGET   => pcEscape(pcUnescape($pc{"effectTarget$i"})),
+    COST     => pcEscape(pcUnescape($pc{"effectCost$i"})),
     RANGE    => pcEscape(pcUnescape($pc{"effectRange$i"})),
-    ENCROACH => pcEscape(pcUnescape($pc{"effectEncroach$i"})),
-    RESTRICT => pcEscape(pcUnescape($pc{"effectRestrict$i"})),
-    TYPE_AUTO  => ($pc{"effectType$i"} eq 'auto'  ? 1 : 0),
-    TYPE_DLOIS => ($pc{"effectType$i"} eq 'dlois' ? 1 : 0),
-    TYPE_EASY  => ($pc{"effectType$i"} eq 'easy'  ? 1 : 0),
-    TYPE_ENEMY => ($pc{"effectType$i"} eq 'enemy' ? 1 : 0),
-    EXP      => $pc{"effectExp$i"},
     NOTE     => pcEscape(pcUnescape($pc{"effectNote$i"})),
   };
 }

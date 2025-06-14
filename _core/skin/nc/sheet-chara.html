@@ -95,23 +95,20 @@
     <button class="open-button" onclick="switchEffectNoteFullOpen();" data-open="" data-text-open="効果を全展開" data-text-close="効果を折畳む"></button>
     <table class="data-table line-tbody">
       <thead>
-        <tr><th>種別<th>名称<th>LV<th>タイミング<th>技能<th>難易度<th>対象<th>射程<th>侵蝕値<th>制限</tr>
+        <tr><th>部位<th>名称<th>タイミング<th>コスト<th>射程</tr>
       </thead>
       <TMPL_LOOP Effects><tbody>
-         <tr>
-          <td rowspan="2"><TMPL_IF TYPE><i class="ef-<TMPL_VAR TYPE>"></i></TMPL_IF></td>
+        <tr>
+          <td rowspan="2"><TMPL_VAR PART></td>
           <td class="name"><TMPL_VAR NAME></td>
-          <td><TMPL_VAR LV></td>
           <td><TMPL_VAR TIMING></td>
           <td><TMPL_VAR SKILL></td>
           <td><TMPL_VAR DFCLTY></td>
           <td><TMPL_VAR TARGET></td>
           <td><TMPL_VAR RANGE></td>
-          <td><TMPL_VAR ENCROACH></td>
-          <td><TMPL_VAR RESTRICT></td>
         </tr>
         <tr>
-          <td class="note" colspan="9"><TMPL_VAR NOTE><TMPL_IF EXP><span class="right">［<b>経験点修正</b>:<TMPL_VAR EXP>点］</span></TMPL_IF></td>
+          <td class="note" colspan="5"><TMPL_VAR NOTE></td>
         </tr>
       </TMPL_LOOP>
     </table>
