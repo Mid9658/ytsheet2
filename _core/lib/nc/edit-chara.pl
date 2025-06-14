@@ -28,10 +28,10 @@ $pc{enhanceArmsGrow}   ||= 0;
 $pc{enhanceMutateGrow} ||= 0;
 $pc{enhanceModifyGrow} ||= 0;
 $pc{enhanceAny}       ||= '';
-$pc{maneuverNum}      ||= do {
+$pc{effectNum}      ||= do {
   my $max = 0;
   foreach my $key (keys %pc){
-    if($key =~ /^maneuverName(\d+)$/){
+    if($key =~ /^effectName(\d+)$/){
       my $num = $1;
       $max = $num if $num > $max;
     }
@@ -124,21 +124,26 @@ foreach (@set::groups){
   push @groups, { ID=>$id, NAME=>$name, SELECTED=>($pc{group} eq $id ? 1:0) };
 }
 
-my $maneuver_rows_html = '';
-foreach my $i (1 .. $pc{maneuverNum}){
-  $maneuver_rows_html .= <<"HTML";
-      <tr id="maneuver-row${i}">
-        <td class="handle"></td>
-        <td>@{[ input "maneuverBroken${i}", 'checkbox' ]}</td>
-        <td>@{[ input "maneuverUsed${i}",   'checkbox' ]}</td>
-        <td><select name="maneuverPart${i}">@{[ optionNc "maneuverPart${i}",'スキル','頭','腕','胴','脚' ]}</select></td>
-        <td>@{[ input "maneuverName${i}" ]}</td>
-        <td><select name="maneuverTiming${i}">@{[ optionNc "maneuverTiming${i}",'オート','アクション','ラピッド','ジャッジ','ダメージ','効果参照' ]}</select></td>
-        <td>@{[ input "maneuverCost${i}" ]}</td>
-        <td>@{[ input "maneuverRange${i}" ]}</td>
-        <td>@{[ input "maneuverNote${i}" ]}</td>
-      </tr>
-HTML
+my @effect_rows;
+foreach my $i (1 .. $pc{effectNum}){
+  push @effect_rows, {
+    ID       => $i,
+    NAME     => pcEscape(pcUnescape($pc{"effectName$i"})),
+    LV       => $pc{"effectLv$i"},
+    TIMING   => pcEscape(pcUnescape($pc{"effectTiming$i"})),
+    SKILL    => pcEscape(pcUnescape($pc{"effectSkill$i"})),
+    DFCLTY   => pcEscape(pcUnescape($pc{"effectDfclty$i"})),
+    TARGET   => pcEscape(pcUnescape($pc{"effectTarget$i"})),
+    RANGE    => pcEscape(pcUnescape($pc{"effectRange$i"})),
+    ENCROACH => pcEscape(pcUnescape($pc{"effectEncroach$i"})),
+    RESTRICT => pcEscape(pcUnescape($pc{"effectRestrict$i"})),
+    TYPE_AUTO  => ($pc{"effectType$i"} eq 'auto'  ? 1 : 0),
+    TYPE_DLOIS => ($pc{"effectType$i"} eq 'dlois' ? 1 : 0),
+    TYPE_EASY  => ($pc{"effectType$i"} eq 'easy'  ? 1 : 0),
+    TYPE_ENEMY => ($pc{"effectType$i"} eq 'enemy' ? 1 : 0),
+    EXP      => $pc{"effectExp$i"},
+    NOTE     => pcEscape(pcUnescape($pc{"effectNote$i"})),
+  };
 }
 
 my @memory_rows;
@@ -236,8 +241,8 @@ $tmpl->param(
   enhanceAnyArms   => $any_checked{arms},
   enhanceAnyMutate => $any_checked{mutate},
   enhanceAnyModify => $any_checked{modify},
-  maneuverNum   => $pc{maneuverNum},
-  ManeuverRowsHTML => $maneuver_rows_html,
+  effectNum    => $pc{effectNum},
+  EffectRows   => \@effect_rows,
   Groups       => \@groups,
   forbiddenBattle => ($pc{forbidden} eq 'battle' ? 1 : 0),
   forbiddenAll    => ($pc{forbidden} eq 'all'    ? 1 : 0),

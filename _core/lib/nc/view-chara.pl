@@ -31,18 +31,22 @@ my $tmpl = HTML::Template->new(
   global_vars       => 1,
 );
 
-$pc{maneuverNum} ||= 3;
-my @maneuvers;
-foreach my $i (1 .. $pc{maneuverNum}){
-  push @maneuvers, {
-    BROKEN => ($pc{"maneuverBroken$i"} ? '☑' : ''),
-    USED   => ($pc{"maneuverUsed$i"}  ? '☑' : ''),
-    PART   => $pc{"maneuverPart$i"},
-    NAME   => $pc{"maneuverName$i"},
-    TIMING => $pc{"maneuverTiming$i"},
-    COST   => $pc{"maneuverCost$i"},
-    RANGE  => $pc{"maneuverRange$i"},
-    NOTE   => $pc{"maneuverNote$i"},
+$pc{effectNum} ||= 0;
+my @effects;
+foreach my $i (1 .. $pc{effectNum}){
+  push @effects, {
+    TYPE     => $pc{"effectType$i"},
+    NAME     => $pc{"effectName$i"},
+    LV       => $pc{"effectLv$i"},
+    TIMING   => $pc{"effectTiming$i"},
+    SKILL    => $pc{"effectSkill$i"},
+    DFCLTY   => $pc{"effectDfclty$i"},
+    TARGET   => $pc{"effectTarget$i"},
+    RANGE    => $pc{"effectRange$i"},
+    ENCROACH => $pc{"effectEncroach$i"},
+    RESTRICT => $pc{"effectRestrict$i"},
+    NOTE     => $pc{"effectNote$i"},
+    EXP      => $pc{"effectExp$i"},
   };
 }
 
@@ -88,7 +92,7 @@ $tmpl->param(
   %pc,
   groupName   => $group_name,
   Tags        => \@tags,
-  Maneuvers   => \@maneuvers,
+  Effects     => \@effects,
   MemoryRows  => \@memory_rows,
   FetterRows  => \@fetter_rows,
   enhanceAnyArms   => $enhance_any_mark{arms},

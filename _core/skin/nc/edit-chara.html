@@ -173,53 +173,82 @@
     <TMPL_VAR imageForm>
   </div>
 </section>
-<section id="maneuvers" class="box">
-  <h2>マニューバ</h2>
-  <input type="hidden" name="maneuverNum" value="<TMPL_VAR maneuverNum>">
-  <table class="edit-table line-tbody no-border-cells" id="maneuver-table">
-    <thead>
-      <tr><th><th>破損<th>使用<th>部位<th>名称<th>タイミング<th>コスト<th>射程<th class="left">効果</tr>
+<section id="effect" class="box">
+  <h2>エフェクト</h2>
+  <input type="hidden" name="effectNum" value="<TMPL_VAR effectNum>">
+  <table class="edit-table line-tbody no-border-cells" id="effect-table">
+    <thead id="effect-head">
+      <tr><th><th>名称<th>LV<th>タイミング<th>技能<th>難易度<th>対象<th>射程<th>侵蝕値<th>制限</tr>
     </thead>
-    <tbody id="maneuver-list">
-<TMPL_VAR ManeuverRowsHTML>
+<TMPL_LOOP EffectRows>
+    <tbody id="effect-row<TMPL_VAR ID>">
+      <tr>
+        <td rowspan="2" class="handle"></td>
+        <td><input type="text" name="effect<TMPL_VAR ID>Name" value="<TMPL_VAR NAME>" placeholder="名称"></td>
+        <td><input type="number" name="effect<TMPL_VAR ID>Lv" value="<TMPL_VAR LV>" min="0" placeholder="Lv"></td>
+        <td><input type="text" name="effect<TMPL_VAR ID>Timing" value="<TMPL_VAR TIMING>" placeholder="タイミング" list="list-timing"></td>
+        <td><input type="text" name="effect<TMPL_VAR ID>Skill" value="<TMPL_VAR SKILL>" placeholder="技能" list="list-effect-skill"></td>
+        <td><input type="text" name="effect<TMPL_VAR ID>Dfclty" value="<TMPL_VAR DFCLTY>" placeholder="難易度" list="list-dfclty"></td>
+        <td><input type="text" name="effect<TMPL_VAR ID>Target" value="<TMPL_VAR TARGET>" placeholder="対象" list="list-target"></td>
+        <td><input type="text" name="effect<TMPL_VAR ID>Range" value="<TMPL_VAR RANGE>" placeholder="射程" list="list-range"></td>
+        <td><input type="text" name="effect<TMPL_VAR ID>Encroach" value="<TMPL_VAR ENCROACH>" placeholder="侵蝕値" list="list-encroach"></td>
+        <td><input type="text" name="effect<TMPL_VAR ID>Restrict" value="<TMPL_VAR RESTRICT>" placeholder="制限" list="list-restrict"></td>
+      </tr>
+      <tr>
+        <td colspan="9">
+          <div>
+            <b>種別</b><select name="effect<TMPL_VAR ID>Type">
+              <option value="">--</option>
+              <option value="auto"  <TMPL_IF TYPE_AUTO>selected</TMPL_IF>>自動</option>
+              <option value="dlois" <TMPL_IF TYPE_DLOIS>selected</TMPL_IF>>Dロイス</option>
+              <option value="easy"  <TMPL_IF TYPE_EASY>selected</TMPL_IF>>イージー</option>
+              <option value="enemy" <TMPL_IF TYPE_ENEMY>selected</TMPL_IF>>エネミー</option>
+            </select>
+            <b class="small">経験点修正</b><input type="number" name="effect<TMPL_VAR ID>Exp" value="<TMPL_VAR EXP>">
+            <b>効果</b><input type="text" name="effect<TMPL_VAR ID>Note" value="<TMPL_VAR NOTE>">
+          </div>
+        </td>
+      </tr>
     </tbody>
+</TMPL_LOOP>
   </table>
-  <div class="add-del-button"><a onclick="addManeuver()">▼</a><a onclick="delManeuver()">▲</a></div>
-  <template id="maneuver-template">
-    <tr id="maneuver-rowTMPL">
-      <td class="handle"></td>
-      <td><input type="checkbox" name="maneuverBrokenTMPL"></td>
-      <td><input type="checkbox" name="maneuverUsedTMPL"></td>
-      <td>
-        <select name="maneuverPartTMPL">
-          <option value="スキル">スキル</option>
-          <option value="頭">頭</option>
-          <option value="腕">腕</option>
-          <option value="胴">胴</option>
-          <option value="脚">脚</option>
-        </select>
-      </td>
-      <td><input type="text" name="maneuverNameTMPL"></td>
-      <td>
-        <select name="maneuverTimingTMPL">
-          <option value="オート">オート</option>
-          <option value="アクション">アクション</option>
-          <option value="ラピッド">ラピッド</option>
-          <option value="ジャッジ">ジャッジ</option>
-          <option value="ダメージ">ダメージ</option>
-          <option value="効果参照">効果参照</option>
-        </select>
-      </td>
-      <td><input type="text" name="maneuverCostTMPL"></td>
-      <td><input type="text" name="maneuverRangeTMPL"></td>
-      <td><input type="text" name="maneuverNoteTMPL"></td>
-    </tr>
+  <div class="add-del-button"><a onclick="addEffect()">▼</a><a onclick="delEffect()">▲</a></div>
+  <template id="effect-template">
+    <tbody id="effect-rowTMPL">
+      <tr>
+        <td rowspan="2" class="handle"></td>
+        <td><input type="text" name="effectNameTMPL" placeholder="名称"></td>
+        <td><input type="number" name="effectLvTMPL" min="0" placeholder="Lv"></td>
+        <td><input type="text" name="effectTimingTMPL" placeholder="タイミング" list="list-timing"></td>
+        <td><input type="text" name="effectSkillTMPL" placeholder="技能" list="list-effect-skill"></td>
+        <td><input type="text" name="effectDfcltyTMPL" placeholder="難易度" list="list-dfclty"></td>
+        <td><input type="text" name="effectTargetTMPL" placeholder="対象" list="list-target"></td>
+        <td><input type="text" name="effectRangeTMPL" placeholder="射程" list="list-range"></td>
+        <td><input type="text" name="effectEncroachTMPL" placeholder="侵蝕値" list="list-encroach"></td>
+        <td><input type="text" name="effectRestrictTMPL" placeholder="制限" list="list-restrict"></td>
+      </tr>
+      <tr>
+        <td colspan="9">
+          <div>
+            <b>種別</b><select name="effectTypeTMPL">
+              <option value="">--</option>
+              <option value="auto">自動</option>
+              <option value="dlois">Dロイス</option>
+              <option value="easy">イージー</option>
+              <option value="enemy">エネミー</option>
+            </select>
+            <b class="small">経験点修正</b><input type="number" name="effectExpTMPL">
+            <b>効果</b><input type="text" name="effectNoteTMPL">
+          </div>
+        </td>
+      </tr>
+    </tbody>
   </template>
 </section>
-<div class="box trash-box" id="maneuver-trash">
-  <h2><span class="material-symbols-outlined">delete</span><span class="shorten">削除マニューバ</span></h2>
-  <table class="edit-table line-tbody" id="maneuver-trash-table"></table>
-  <i class="material-symbols-outlined close-button" onclick="document.getElementById('maneuver-trash').style.display = 'none';">close</i>
+<div class="box trash-box" id="effect-trash">
+  <h2><span class="material-symbols-outlined">delete</span><span class="shorten">削除エフェクト</span></h2>
+  <table class="edit-table line-tbody" id="effect-trash-table"></table>
+  <i class="material-symbols-outlined close-button" onclick="document.getElementById('effect-trash').style.display = 'none';">close</i>
 </div>
 <section id="memory" class="box">
   <h2>記憶のカケラ</h2>
@@ -273,6 +302,94 @@
 </form>
 <div class="back-button"><a href="./">⏎</a></div>
 </main>
+<datalist id="list-timing">
+  <option value="オート">
+  <option value="マイナー">
+  <option value="メジャー">
+  <option value="メジャー／リア">
+  <option value="リアクション">
+  <option value="セットアップ">
+  <option value="イニシアチブ">
+  <option value="クリンナップ">
+  <option value="常時">
+  <option value="効果参照">
+</datalist>
+<datalist id="list-effect-skill">
+  <option value="―">
+  <option value="シンドローム">
+  <option value="〈白兵〉">
+  <option value="〈射撃〉">
+  <option value="〈RC〉">
+  <option value="〈交渉〉">
+  <option value="〈白兵〉〈射撃〉">
+  <option value="〈白兵〉〈RC〉">
+  <option value="〈回避〉">
+  <option value="〈知覚〉">
+  <option value="〈意志〉">
+  <option value="〈調達〉">
+  <option value="【肉体】">
+  <option value="【感覚】">
+  <option value="【精神】">
+  <option value="【社会】">
+  <option value="〈運転:〉">
+  <option value="〈芸術:〉">
+  <option value="〈知識:〉">
+  <option value="〈情報:〉">
+  <option value="効果参照">
+</datalist>
+<datalist id="list-dfclty">
+  <option value="―">
+  <option value="自動成功">
+  <option value="対決">
+  <option value="効果参照">
+</datalist>
+<datalist id="list-target">
+  <option value="―">
+  <option value="自身">
+  <option value="単体">
+  <option value="3体">
+  <option value="[LV+1]体">
+  <option value="範囲">
+  <option value="範囲（選択）">
+  <option value="シーン">
+  <option value="シーン（選択）">
+  <option value="効果参照">
+</datalist>
+<datalist id="list-range">
+  <option value="―">
+  <option value="至近">
+  <option value="武器">
+  <option value="視界">
+  <option value="効果参照">
+</datalist>
+<datalist id="list-encroach">
+  <option value="―">
+  <option value="1">
+  <option value="2">
+  <option value="3">
+  <option value="4">
+  <option value="5">
+  <option value="6">
+  <option value="7">
+  <option value="8">
+  <option value="10">
+  <option value="20">
+  <option value="1D10">
+  <option value="2D10">
+  <option value="4D10">
+  <option value="効果参照">
+</datalist>
+<datalist id="list-restrict">
+  <option value="―">
+  <option value="ピュア">
+  <option value="80%">
+  <option value="100%">
+  <option value="120%" class="percent120">
+  <option value="Dロイス">
+  <option value="リミット">
+  <option value="RB">
+  <option value="従者専用">
+</datalist>
 <script src="<TMPL_VAR coreDir>/lib/edit.js?<TMPL_VAR ver>" defer></script>
 <script src="<TMPL_VAR coreDir>/lib/nc/edit-chara.js?<TMPL_VAR ver>" defer></script>
 <script>

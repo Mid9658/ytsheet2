@@ -10,12 +10,29 @@ sub data_calc {
   $pc{tags} ||= '';
   $pc{hide} ||= 0;
 
+  $pc{effectNum} ||= 6;
+
   ### 記憶のカケラ
   $pc{memoryNum} ||= 2;
   $pc{memoryNum} = 6 if $pc{memoryNum} > 6;
   foreach my $i (1 .. $pc{memoryNum}){
     $pc{"memoryName$i"} ||= '';
     $pc{"memoryNote$i"} ||= '';
+  }
+
+  foreach my $i (1 .. $pc{effectNum}){
+    $pc{"effectName$i"}     ||= '';
+    $pc{"effectLv$i"}       ||= '';
+    $pc{"effectTiming$i"}   ||= '';
+    $pc{"effectSkill$i"}    ||= '';
+    $pc{"effectDfclty$i"}   ||= '';
+    $pc{"effectTarget$i"}   ||= '';
+    $pc{"effectRange$i"}    ||= '';
+    $pc{"effectEncroach$i"} ||= '';
+    $pc{"effectRestrict$i"} ||= '';
+    $pc{"effectType$i"}     ||= '';
+    $pc{"effectExp$i"}      ||= '';
+    $pc{"effectNote$i"}     ||= '';
   }
 
   ### 未練／狂気
