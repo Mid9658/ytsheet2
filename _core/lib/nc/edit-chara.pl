@@ -116,28 +116,21 @@ foreach (@set::groups){
   push @groups, { ID=>$id, NAME=>$name, SELECTED=>($pc{group} eq $id ? 1:0) };
 }
 
-my @maneuver_rows;
+my $maneuver_rows_html = '';
 foreach my $i (1 .. $pc{maneuverNum}){
-  push @maneuver_rows, {
-    ID    => $i,
-    BROKEN=> ($pc{"maneuverBroken$i"} ? 'checked' : ''),
-    USED  => ($pc{"maneuverUsed$i"} ? 'checked' : ''),
-    PART_SKILL => ($pc{"maneuverPart$i"} eq 'スキル' ? 'selected' : ''),
-    PART_HEAD  => ($pc{"maneuverPart$i"} eq '頭' ? 'selected' : ''),
-    PART_ARM   => ($pc{"maneuverPart$i"} eq '腕' ? 'selected' : ''),
-    PART_BODY  => ($pc{"maneuverPart$i"} eq '胴' ? 'selected' : ''),
-    PART_LEG   => ($pc{"maneuverPart$i"} eq '脚' ? 'selected' : ''),
-    NAME   => pcEscape(pcUnescape($pc{"maneuverName$i"})),
-    TIMING_AUTO   => ($pc{"maneuverTiming$i"} eq 'オート'     ? 'selected' : ''),
-    TIMING_ACTION => ($pc{"maneuverTiming$i"} eq 'アクション' ? 'selected' : ''),
-    TIMING_RAPID  => ($pc{"maneuverTiming$i"} eq 'ラピッド'   ? 'selected' : ''),
-    TIMING_JUDGE  => ($pc{"maneuverTiming$i"} eq 'ジャッジ'   ? 'selected' : ''),
-    TIMING_DAMAGE => ($pc{"maneuverTiming$i"} eq 'ダメージ'   ? 'selected' : ''),
-    TIMING_REF    => ($pc{"maneuverTiming$i"} eq '効果参照'   ? 'selected' : ''),
-    COST   => pcEscape(pcUnescape($pc{"maneuverCost$i"})),
-    RANGE  => pcEscape(pcUnescape($pc{"maneuverRange$i"})),
-    NOTE   => pcEscape(pcUnescape($pc{"maneuverNote$i"})),
-  };
+  $maneuver_rows_html .= <<"HTML";
+      <tr id="maneuver-row${i}">
+        <td class="handle"></td>
+        <td>@{[ input "maneuver${i}Broken", 'checkbox' ]}</td>
+        <td>@{[ input "maneuver${i}Used",   'checkbox' ]}</td>
+        <td><select name="maneuverPart${i}">@{[ option "maneuverPart${i}",'スキル','頭','腕','胴','脚' ]}</select></td>
+        <td>@{[ input "maneuver${i}Name" ]}</td>
+        <td><select name="maneuverTiming${i}">@{[ option "maneuverTiming${i}",'オート','アクション','ラピッド','ジャッジ','ダメージ','効果参照' ]}</select></td>
+        <td>@{[ input "maneuver${i}Cost" ]}</td>
+        <td>@{[ input "maneuver${i}Range" ]}</td>
+        <td>@{[ input "maneuver${i}Note" ]}</td>
+      </tr>
+HTML
 }
 
 my @memory_rows;
@@ -235,7 +228,7 @@ $tmpl->param(
   enhanceAnyMutate => $any_checked{mutate},
   enhanceAnyModify => $any_checked{modify},
   maneuverNum   => $pc{maneuverNum},
-  ManeuverRows  => \@maneuver_rows,
+  ManeuverRowsHTML => $maneuver_rows_html,
   Groups       => \@groups,
   forbiddenBattle => ($pc{forbidden} eq 'battle' ? 1 : 0),
   forbiddenAll    => ($pc{forbidden} eq 'all'    ? 1 : 0),

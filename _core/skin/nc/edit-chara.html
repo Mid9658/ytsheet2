@@ -181,36 +181,7 @@
       <tr><th><th>破損<th>使用<th>部位<th>名称<th>タイミング<th>コスト<th>射程<th class="left">効果</tr>
     </thead>
     <tbody id="maneuver-list">
-<TMPL_LOOP ManeuverRows>
-      <tr id="maneuver-row<TMPL_VAR ID>">
-        <td class="handle"></td>
-        <td><input type="checkbox" name="maneuverBroken<TMPL_VAR ID>" <TMPL_VAR BROKEN>></td>
-        <td><input type="checkbox" name="maneuverUsed<TMPL_VAR ID>" <TMPL_VAR USED>></td>
-        <td>
-          <select name="maneuverPart<TMPL_VAR ID>">
-            <option value="スキル" <TMPL_VAR PART_SKILL>>スキル</option>
-            <option value="頭" <TMPL_VAR PART_HEAD>>頭</option>
-            <option value="腕" <TMPL_VAR PART_ARM>>腕</option>
-            <option value="胴" <TMPL_VAR PART_BODY>>胴</option>
-            <option value="脚" <TMPL_VAR PART_LEG>>脚</option>
-          </select>
-        </td>
-        <td><input type="text" name="maneuverName<TMPL_VAR ID>" value="<TMPL_VAR NAME>"></td>
-        <td>
-          <select name="maneuverTiming<TMPL_VAR ID>">
-            <option value="オート" <TMPL_VAR TIMING_AUTO>>オート</option>
-            <option value="アクション" <TMPL_VAR TIMING_ACTION>>アクション</option>
-            <option value="ラピッド" <TMPL_VAR TIMING_RAPID>>ラピッド</option>
-            <option value="ジャッジ" <TMPL_VAR TIMING_JUDGE>>ジャッジ</option>
-            <option value="ダメージ" <TMPL_VAR TIMING_DAMAGE>>ダメージ</option>
-            <option value="効果参照" <TMPL_VAR TIMING_REF>>効果参照</option>
-          </select>
-        </td>
-        <td><input type="text" name="maneuverCost<TMPL_VAR ID>" value="<TMPL_VAR COST>"></td>
-        <td><input type="text" name="maneuverRange<TMPL_VAR ID>" value="<TMPL_VAR RANGE>"></td>
-        <td><input type="text" name="maneuverNote<TMPL_VAR ID>" value="<TMPL_VAR NOTE>"></td>
-      </tr>
-</TMPL_LOOP>
+<TMPL_VAR ManeuverRowsHTML>
     </tbody>
   </table>
   <div class="add-del-button"><a onclick="addManeuver()">▼</a><a onclick="delManeuver()">▲</a></div>

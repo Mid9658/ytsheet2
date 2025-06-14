@@ -58,10 +58,7 @@ window.onload = function() {
   if(typeof setSortable === 'function'){
     setSortable('memory','#memory-table tbody','tr');
   }
-  if(!document.querySelector('#maneuver-list tr')){
-    const num = Math.max(Number(form.maneuverNum.value) || 0, 1);
-    for(let i=0; i<num; i++){ addManeuver(); }
-  }
+  // マニューバは編集画面表示時点でサーバーから出力されるため既存データ取得の処理は不要
   if(!document.querySelector('#memory-list tr')){
     const num = Math.max(Number(form.memoryNum.value) || 0, 1);
     for(let i=0; i<num; i++){ addMemory(); }
