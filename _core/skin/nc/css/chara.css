@@ -55,13 +55,10 @@ article {
   font-feature-settings: "palt";
 }
 
-#effect table tbody td:nth-child(2) { font-weight: bold; }
+#effect table tbody td:nth-child(3) { font-weight: bold; }
 #effect table tbody td:nth-child(4),
 #effect table tbody td:nth-child(5),
-#effect table tbody td:nth-child(6),
-#effect table tbody td:nth-child(7),
-#effect table tbody td:nth-child(8),
-#effect table tbody td:nth-child(10) {
+#effect table tbody td:nth-child(6) {
   font-size: 90%;
 }
 

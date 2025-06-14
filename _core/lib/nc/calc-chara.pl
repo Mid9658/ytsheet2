@@ -21,18 +21,12 @@ sub data_calc {
   }
 
   foreach my $i (1 .. $pc{effectNum}){
-    $pc{"effectName$i"}     ||= '';
-    $pc{"effectLv$i"}       ||= '';
-    $pc{"effectTiming$i"}   ||= '';
-    $pc{"effectSkill$i"}    ||= '';
-    $pc{"effectDfclty$i"}   ||= '';
-    $pc{"effectTarget$i"}   ||= '';
-    $pc{"effectRange$i"}    ||= '';
-    $pc{"effectEncroach$i"} ||= '';
-    $pc{"effectRestrict$i"} ||= '';
-    $pc{"effectType$i"}     ||= '';
-    $pc{"effectExp$i"}      ||= '';
-    $pc{"effectNote$i"}     ||= '';
+    $pc{"effectPart$i"}   ||= '';
+    $pc{"effectName$i"}   ||= '';
+    $pc{"effectTiming$i"} ||= '';
+    $pc{"effectCost$i"}   ||= '';
+    $pc{"effectRange$i"}  ||= '';
+    $pc{"effectNote$i"}   ||= '';
   }
 
   ### 未練／狂気
