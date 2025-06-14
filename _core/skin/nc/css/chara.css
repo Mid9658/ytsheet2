@@ -17,9 +17,13 @@ article {
 
 #area-status {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: .5rem;
+  grid-template-columns: 2fr 1fr;
+  gap: .5rem;
+  grid-template-areas:
+    "LEFT RIGHT";
 }
+#status-left  { grid-area: LEFT; }
+#status-right { grid-area: RIGHT; }
 #personal {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -47,5 +51,11 @@ article {
 @media screen and (max-width: 735px) {
   article {
     grid-template-columns: 1fr;
+  }
+  #area-status {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "RIGHT"
+      "LEFT";
   }
 }

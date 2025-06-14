@@ -30,15 +30,17 @@
   </div>
 
   <div id="area-status">
-    <div id="image" class="image" style="background-image:url(<TMPL_VAR imageSrc>);"></div>
-    <div id="personal" class="box-union">
-      <dl class="box" id="age"><dt>年齢<dd><TMPL_VAR age></dl>
-      <dl class="box" id="gender"><dt>性別<dd><TMPL_VAR gender></dl>
-    </div>
-    <div id="renegade" class="box">
-      <table id="class-enhance" class="data-table">
-        <thead>
-          <tr><th colspan="5">ポジション・クラス／強化値</th></tr>
+    <div id="status-left">
+      <div id="personal" class="box-union">
+        <dl class="box" id="age"><dt>年齢<dd><TMPL_VAR age></dl>
+        <dl class="box" id="gender"><dt>性別<dd><TMPL_VAR gender></dl>
+        <dl class="box" id="height"><dt>身長<dd><TMPL_VAR height></dl>
+        <dl class="box" id="weight"><dt>体重<dd><TMPL_VAR weight></dl>
+      </div>
+      <div id="renegade" class="box">
+        <table id="class-enhance" class="data-table">
+          <thead>
+            <tr><th colspan="5">ポジション・クラス／強化値</th></tr>
         </thead>
         <tbody>
           <tr>
@@ -79,8 +81,12 @@
             <td><TMPL_VAR enhanceModifyTotal></td>
           </tr>
         </tbody>
-      </table>
-      <dl><dt>行動値<dd><TMPL_VAR actionPoint></dl>
+        </table>
+        <dl><dt>行動値<dd><TMPL_VAR actionPoint></dl>
+      </div>
+    </div>
+    <div id="status-right">
+      <div id="image" class="image" style="background-image:url(<TMPL_VAR imageSrc>);"></div>
     </div>
   </div>
 
