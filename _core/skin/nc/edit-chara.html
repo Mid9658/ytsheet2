@@ -245,6 +245,11 @@
     </tr>
   </template>
 </section>
+<div class="box trash-box" id="maneuver-trash">
+  <h2><span class="material-symbols-outlined">delete</span><span class="shorten">削除マニューバ</span></h2>
+  <table class="edit-table line-tbody" id="maneuver-trash-table"></table>
+  <i class="material-symbols-outlined close-button" onclick="document.getElementById('maneuver-trash').style.display = 'none';">close</i>
+</div>
 <section id="memory" class="box">
   <h2>記憶のカケラ</h2>
   <input type="hidden" name="memoryNum" value="<TMPL_VAR memoryNum>">
