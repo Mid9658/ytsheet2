@@ -249,13 +249,13 @@
   <h2>未練／狂気</h2>
   <table class="edit-table no-border-cells" id="fetters-table">
     <thead>
-      <tr><th>未練対象<th>未練内容<th>発狂効果<th>狂気点</tr>
+      <tr><th>対象<th>未練<th>発狂効果<th>狂気点</tr>
     </thead>
     <tbody>
 <TMPL_LOOP FetterRows>
       <tr>
         <td><input type="text" name="fetterTarget<TMPL_VAR ID>" value="<TMPL_VAR TARGET>"></td>
-        <td><input type="text" name="fetterNote<TMPL_VAR ID>" value="<TMPL_VAR NOTE>"></td>
+        <td><span class="fetter-to">への</span><input type="text" name="fetterNote<TMPL_VAR ID>" value="<TMPL_VAR NOTE>"></td>
         <td><input type="text" name="fetterEffect<TMPL_VAR ID>" value="<TMPL_VAR EFFECT>"></td>
         <td><input type="number" name="fetterPoint<TMPL_VAR ID>" value="<TMPL_VAR POINT>" min="0" max="4"></td>
       </tr>

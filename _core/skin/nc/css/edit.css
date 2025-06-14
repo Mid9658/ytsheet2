@@ -858,7 +858,12 @@ body:not(.mode-crc) .crc-only {
   font-size: 85%;
   font-weight: bold;
   
-  .minus {
+.minus {
     color: #e70;
   }
+}
+
+#fetters .fetter-to {
+  margin: 0 .2em;
+  pointer-events: none;
 }
