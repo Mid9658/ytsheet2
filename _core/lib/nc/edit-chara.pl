@@ -117,44 +117,68 @@ $pc{enhanceArmsTotal}   = $arms   + $pc{enhanceArmsGrow};
 $pc{enhanceMutateTotal} = $mutate + $pc{enhanceMutateGrow};
 $pc{enhanceModifyTotal} = $modify + $pc{enhanceModifyGrow};
 
-my @groups;
+my $groups_html = '';
 foreach (@set::groups){
   my ($id, undef, $name, undef, $exclusive) = @$_;
   next if($exclusive && (!$LOGIN_ID || $LOGIN_ID !~ /^($exclusive)$/));
-  push @groups, { ID=>$id, NAME=>$name, SELECTED=>($pc{group} eq $id ? 1:0) };
+  my $selected = ($pc{group} eq $id ? ' selected' : '');
+  $groups_html .= qq{<option value="$id"$selected>$name</option>};
 }
 
-my @effect_rows;
+my $menu_html = qq{<li class="small"><a href="./">一覧へ</a>};
+
+my $effect_rows_html = '';
 foreach my $i (1 .. $pc{effectNum}){
-  push @effect_rows, {
-    ID       => $i,
-    PART     => pcEscape(pcUnescape($pc{"effectPart$i"})),
-    NAME     => pcEscape(pcUnescape($pc{"effectName$i"})),
-    TIMING   => pcEscape(pcUnescape($pc{"effectTiming$i"})),
-    COST     => pcEscape(pcUnescape($pc{"effectCost$i"})),
-    RANGE    => pcEscape(pcUnescape($pc{"effectRange$i"})),
-    NOTE     => pcEscape(pcUnescape($pc{"effectNote$i"})),
+  my $part   = pcEscape(pcUnescape($pc{"effectPart$i"}));
+  my $name   = pcEscape(pcUnescape($pc{"effectName$i"}));
+  my $timing = pcEscape(pcUnescape($pc{"effectTiming$i"}));
+  my $cost   = pcEscape(pcUnescape($pc{"effectCost$i"}));
+  my $range  = pcEscape(pcUnescape($pc{"effectRange$i"}));
+  my $note   = pcEscape(pcUnescape($pc{"effectNote$i"}));
+  $effect_rows_html .= qq{
+    <tbody id="effect-row$i">
+      <tr>
+        <td rowspan="2" class="handle"></td>
+        <td><input type="text" name="effectPart$i" value="$part" placeholder="部位" list="list-part"></td>
+        <td><input type="text" name="effectName$i" value="$name" placeholder="名称"></td>
+        <td><input type="text" name="effectTiming$i" value="$timing" placeholder="タイミング" list="list-timing"></td>
+        <td><input type="text" name="effectCost$i" value="$cost" placeholder="コスト" list="list-cost"></td>
+        <td><input type="text" name="effectRange$i" value="$range" placeholder="射程" list="list-range"></td>
+      </tr>
+      <tr>
+        <td class="note" colspan="5"><input type="text" name="effectNote$i" value="$note" placeholder="効果"></td>
+      </tr>
+    </tbody>
   };
 }
 
-my @memory_rows;
+my $memory_rows_html = '';
 foreach my $i (1 .. $pc{memoryNum}){
-  push @memory_rows, {
-    ID   => $i,
-    NAME => pcEscape(pcUnescape($pc{"memoryName$i"})),
-    NOTE => pcEscape(pcUnescape($pc{"memoryNote$i"})),
+  my $name = pcEscape(pcUnescape($pc{"memoryName$i"}));
+  my $note = pcEscape(pcUnescape($pc{"memoryNote$i"}));
+  $memory_rows_html .= qq{
+      <tr id="memory-row$i">
+        <td><input type="text" name="memoryName$i" value="$name"></td>
+        <td><input type="text" name="memoryNote$i" value="$note"></td>
+      </tr>
   };
 }
 
-my @fetter_rows;
+my $fetter_rows_html = '';
 foreach my $i (1 .. 6){
-  push @fetter_rows, {
-    ID     => $i,
-    TARGET => pcEscape(pcUnescape($pc{"fetterTarget$i"})),
-    NOTE   => pcEscape(pcUnescape($pc{"fetterNote$i"})),
-    EFFECT => pcEscape(pcUnescape($pc{"fetterEffect$i"})),
-    EFFECT_NOTE => do { my $t = pcUnescape($pc{"fetterEffectNote$i"}); $t =~ s/&lt;br&gt;/\n/g; pcEscape($t) },
-    POINT  => pcEscape(pcUnescape($pc{"fetterPoint$i"})),
+  my $target = pcEscape(pcUnescape($pc{"fetterTarget$i"}));
+  my $note   = pcEscape(pcUnescape($pc{"fetterNote$i"}));
+  my $effect = pcEscape(pcUnescape($pc{"fetterEffect$i"}));
+  my $effect_note = do { my $t = pcUnescape($pc{"fetterEffectNote$i"}); $t =~ s/&lt;br&gt;/\n/g; pcEscape($t) };
+  my $point  = pcEscape(pcUnescape($pc{"fetterPoint$i"}));
+  $fetter_rows_html .= qq{
+      <tr>
+        <td><input type="text" name="fetterTarget$i" value="$target"></td>
+        <td><span class="fetter-to">への</span><select name="fetterNote$i" data-value="$note" oninput="setFetter($i)"></select></td>
+        <td><input type="number" name="fetterPoint$i" value="$point" min="0" max="4"></td>
+        <td><input type="text" name="fetterEffect$i" value="$effect" readonly></td>
+        <td><input type="text" name="fetterEffectNote$i" value="$effect_note"></td>
+      </tr>
   };
 }
 
@@ -218,8 +242,8 @@ $tmpl->param(
   imageURL     => $pc{imageURL},
   imageForm    => $imageForm,
   memoryNum    => $pc{memoryNum},
-  MemoryRows   => \@memory_rows,
-  FetterRows   => \@fetter_rows,
+  MemoryRowsHTML => $memory_rows_html,
+  FetterRowsHTML => $fetter_rows_html,
   freeNote     => do { my $t = pcUnescape($pc{freeNote}); $t =~ s/&lt;br&gt;/\n/g; pcEscape($t) },
   forbidden    => $pc{forbidden},
   hide         => $pc{hide},
@@ -233,11 +257,11 @@ $tmpl->param(
   enhanceAnyMutate => $any_checked{mutate},
   enhanceAnyModify => $any_checked{modify},
   effectNum    => $pc{effectNum},
-  EffectRows   => \@effect_rows,
-  Groups       => \@groups,
+  EffectRowsHTML => $effect_rows_html,
+  GroupsHTML   => $groups_html,
   forbiddenBattle => ($pc{forbidden} eq 'battle' ? 1 : 0),
   forbiddenAll    => ($pc{forbidden} eq 'all'    ? 1 : 0),
-  Menu         => [ { TEXT => '一覧へ', TYPE => 'href', VALUE => './', SIZE => 'small' } ],
+  MenuHTML     => $menu_html,
 );
 
 print "Content-Type: text/html\n\n";
