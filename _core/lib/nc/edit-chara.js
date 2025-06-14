@@ -168,19 +168,27 @@ function setFetter(num){
     form['fetterEffect'+num].value = data.effect;
     form['fetterEffectNote'+num].value = data.text;
   }
+  else {
+    form['fetterEffect'+num].value = '';
+    form['fetterEffectNote'+num].value = '';
+  }
 }
 
 window.addEventListener('load', () => {
   for(let i=1;i<=6;i++){
     const select = form['fetterNote'+i];
     if(!select) continue;
+    const blank = document.createElement('option');
+    blank.value = '';
+    blank.textContent = '――';
+    select.appendChild(blank);
     Object.keys(fetterData).forEach(name => {
       const op = document.createElement('option');
       op.value = name;
       op.textContent = name;
       select.appendChild(op);
     });
-    if(select.dataset.value){ select.value = select.dataset.value; }
+    select.value = select.dataset.value || '';
     setFetter(i);
   }
 });
