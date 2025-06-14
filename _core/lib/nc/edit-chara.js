@@ -137,7 +137,7 @@ function delEffect(){
     for(let id of sortable.toArray()){
       const row = document.querySelector(`tbody#${id}`);
       if(!row) continue;
-      replaceSortedNames(row,num,/^(effect)(?:Trash)?[0-9]+(.+)$/);
+      replaceSortedNames(row,num,/^(effect(?:Trash)?[A-Za-z]*)(?:\d+)([A-Za-z]*)$/);
       num++;
     }
     form.effectNum.value = num-1;
@@ -146,7 +146,7 @@ function delEffect(){
       const row = document.querySelector(`tbody#${id}`);
       if(!row) continue;
       del++;
-      replaceSortedNames(row,'Trash'+del,/^(effect)(?:Trash)?[0-9]+(.+)$/);
+      replaceSortedNames(row,'Trash'+del,/^(effect(?:Trash)?[A-Za-z]*)(?:\d+)([A-Za-z]*)$/);
     }
     effectTrashNum = del;
     if(!del){ document.getElementById('effect-trash').style.display = 'none'; }
