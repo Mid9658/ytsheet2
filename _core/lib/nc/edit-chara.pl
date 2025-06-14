@@ -40,7 +40,15 @@ $pc{maneuverNum}      ||= do {
 };
 $pc{memoryNum}        ||= 2;
 foreach my $i (1 .. 6){
-  $pc{"fetterPoint$i"} ||= ($i == 1 ? 3 : '');
+  if($i == 1){
+    $pc{"fetterTarget1"} ||= 'たからもの';
+    $pc{"fetterNote1"}   ||= '依存';
+    $pc{"fetterEffect1"} ||= '幼児退行';
+    $pc{"fetterPoint1"}  ||= 3;
+  }
+  else {
+    $pc{"fetterPoint$i"} ||= '';
+  }
 }
 $pc{memoryNum}        ||= 2;
 $pc{forbidden}        ||= '';

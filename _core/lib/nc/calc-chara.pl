@@ -20,10 +20,18 @@ sub data_calc {
 
   ### 未練／狂気
   foreach my $i (1 .. 6){
-    $pc{"fetterTarget$i"} ||= '';
-    $pc{"fetterNote$i"}   ||= '';
-    $pc{"fetterEffect$i"} ||= '';
-    $pc{"fetterPoint$i"}  ||= ($i == 1 ? 3 : '');
+    if($i == 1){
+      $pc{"fetterTarget1"} ||= 'たからもの';
+      $pc{"fetterNote1"}   ||= '依存';
+      $pc{"fetterEffect1"} ||= '幼児退行';
+      $pc{"fetterPoint1"}  ||= 3;
+    }
+    else {
+      $pc{"fetterTarget$i"} ||= '';
+      $pc{"fetterNote$i"}   ||= '';
+      $pc{"fetterEffect$i"} ||= '';
+      $pc{"fetterPoint$i"}  ||= '';
+    }
   }
 
   $pc{enhanceAny} ||= '';
