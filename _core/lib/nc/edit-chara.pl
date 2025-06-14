@@ -131,9 +131,9 @@ foreach my $i (1 .. $pc{maneuverNum}){
         <td class="handle"></td>
         <td>@{[ input "maneuverBroken${i}", 'checkbox' ]}</td>
         <td>@{[ input "maneuverUsed${i}",   'checkbox' ]}</td>
-        <td><select name="maneuverPart${i}">@{[ option "maneuverPart${i}",'スキル','頭','腕','胴','脚' ]}</select></td>
+        <td><select name="maneuverPart${i}">@{[ optionNc "maneuverPart${i}",'スキル','頭','腕','胴','脚' ]}</select></td>
         <td>@{[ input "maneuverName${i}" ]}</td>
-        <td><select name="maneuverTiming${i}">@{[ option "maneuverTiming${i}",'オート','アクション','ラピッド','ジャッジ','ダメージ','効果参照' ]}</select></td>
+        <td><select name="maneuverTiming${i}">@{[ optionNc "maneuverTiming${i}",'オート','アクション','ラピッド','ジャッジ','ダメージ','効果参照' ]}</select></td>
         <td>@{[ input "maneuverCost${i}" ]}</td>
         <td>@{[ input "maneuverRange${i}" ]}</td>
         <td>@{[ input "maneuverNote${i}" ]}</td>
