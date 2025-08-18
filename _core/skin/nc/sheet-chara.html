@@ -91,16 +91,16 @@
   </div>
 
   <section class="box effects" id="effect">
-    <h2>エフェクト</h2>
+    <h2>マニューバ</h2>
     <button class="open-button" onclick="switchEffectNoteFullOpen();" data-open="" data-text-open="効果を全展開" data-text-close="効果を折畳む"></button>
     <table class="data-table line-tbody">
       <thead>
-        <tr><th>部位<th>名称<th>タイミング<th>コスト<th>射程</tr>
+        <tr><th>名称<th>部位<th>タイミング<th>コスト<th>射程</tr>
       </thead>
       <TMPL_LOOP Effects><tbody>
         <tr>
-          <td rowspan="2"><TMPL_VAR PART></td>
-          <td class="name"><TMPL_VAR NAME></td>
+          <td rowspan="2" class="name"><TMPL_VAR NAME></td>
+          <td><TMPL_VAR PART></td>
           <td><TMPL_VAR TIMING></td>
           <td><TMPL_VAR COST></td>
           <td><TMPL_VAR RANGE></td>
