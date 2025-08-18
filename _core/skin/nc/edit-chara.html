@@ -178,7 +178,7 @@
   <input type="hidden" name="effectNum" value="<TMPL_VAR effectNum>">
   <table class="edit-table line-tbody no-border-cells" id="effect-table">
     <thead id="effect-head">
-      <tr><th><th>部位<th>名称<th>タイミング<th>コスト<th>射程</tr>
+      <tr><th><th>名称<th>部位<th>タイミング<th>コスト<th>射程</tr>
     </thead>
 <TMPL_VAR EffectRowsHTML ESCAPE=0>
   </table>
@@ -187,8 +187,8 @@
     <tbody id="effect-rowTMPL">
       <tr>
         <td rowspan="2" class="handle"></td>
-        <td><input type="text" name="effectTMPLPart" placeholder="部位" list="list-part"></td>
         <td><input type="text" name="effectTMPLName" placeholder="名称"></td>
+        <td><input type="text" name="effectTMPLPart" placeholder="部位" list="list-part"></td>
         <td><input type="text" name="effectTMPLTiming" placeholder="タイミング" list="list-timing"></td>
         <td><input type="text" name="effectTMPLCost" placeholder="コスト" list="list-cost"></td>
         <td><input type="text" name="effectTMPLRange" placeholder="射程" list="list-range"></td>
