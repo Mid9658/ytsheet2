@@ -105,7 +105,10 @@ sub data_calc {
   $pc{$_} = pcEscape($pc{$_}) foreach (keys %pc);
   $pc{tags} = normalizeHashtags($pc{tags});
 
-  $::newline = "$pc{id}<>$::file<>$pc{birthTime}<>$::now<>$pc{characterName}<>$pc{playerName}<>$pc{group}<>$pc{lastSession}<>$pc{image}<> $pc{tags} <>$pc{hide}<>";
+  $::newline = "$pc{id}<>$::file<>$pc{birthTime}<>$::now<>".
+               "$pc{characterName}<>$pc{playerName}<>$pc{group}<>".
+               "$pc{gender}<>$pc{age}<>$pc{mainClass}<>$pc{subClass}<>$pc{position}<>".
+               "$pc{lastSession}<>$pc{image}<> $pc{tags} <>$pc{hide}<>";
   return %pc;
 }
 
