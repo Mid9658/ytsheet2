@@ -28,20 +28,27 @@ if(open my $FH, '<', $set::listfile){
     chomp $line;
     my (
       $id, undef, undef, $update,
-      $name, $player, $group, undef, undef, $tags
+      $name, $player, $group,
+      $gender, $age, $mainClass, $subClass, $position,
+      undef, undef, $tags, undef
     ) = split /<>/, $line;
+    $gender = stylizeGender($gender);
+    $age    = stylizeAge($age);
     push @characters, {
       'ID'       => $id,
       'NAME'     => ($name || '無題'),
       'PLAYER'   => $player,
-      'GENDER'   => '',
-      'AGE'      => '',
+      'GENDER'   => $gender,
+      'AGE'      => $age,
       'SIGN'     => '',
       'BLOOD'    => '',
       'WORKS'    => '',
       'EXP'      => '',
       'SYNDROME' => '',
       'DLOIS'    => '',
+      'MAINCLASS'=> $mainClass,
+      'SUBCLASS' => $subClass,
+      'POSITION' => $position,
       'TAGS'     => $tags,
       'DATE'     => epocToDate($update),
     };
